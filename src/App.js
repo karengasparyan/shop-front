@@ -8,6 +8,8 @@ import SingleProduct from "./pages/SingleProduct"
 import ShoppingCart from "./components/Shop/ShoppingCart";
 import CheckOut from "./components/Shop/CheckOut";
 import {ToastContainer} from "react-toastify";
+import ShippingAndPayment from "./pages/ShippingAndPayment";
+import Guarantee from "./pages/Guarantee";
 
 class App extends Component {
   render() {
@@ -28,6 +30,8 @@ class App extends Component {
             <Route path="/shopping-cart" exact component={ShoppingCart}/>
             <Route path="/check-out" exact component={CheckOut}/>
             <Route path="/contacts" exact component={Contacts}/>
+            <Route path="/shipping-payment" exact component={ShippingAndPayment}/>
+            <Route path="/guarantee" exact component={Guarantee}/>
             <Route path="/product/:id" exact component={SingleProduct}/>
             <Route component={Error404}/>
           </Switch>

@@ -59,8 +59,8 @@ class Footer extends Component {
                     {/*<li>Email: hello.colorlib@gmail.com</li>*/}
                   </ul>
                   <div className="footer-social">
-                    <a href="#"><i className="fa fa-facebook"/></a>
-                    <a href="#"><i className="fa fa-instagram"/></a>
+                    <a ><i className="fa fa-facebook"/></a>
+                    <a href="https://www.instagram.com/kolyaskivrostove/"><i className="fa fa-instagram"/></a>
                   </div>
                 </div>
               </div>

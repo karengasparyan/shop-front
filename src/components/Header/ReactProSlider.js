@@ -7,6 +7,8 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from "prop-types";
 import {Link, NavLink} from "react-router-dom";
+import Utils from "../../helpers/Utils";
+import {getProductsRequest} from "../../store/actions/products";
 
 class ReactProSlider extends Component {
 
@@ -14,8 +16,13 @@ class ReactProSlider extends Component {
       show: PropTypes.bool.isRequired,
     }
 
+  changeAttribute = (catalog) => {
+    const query = {'каталог': catalog}
+    this.props.getProductsRequest(query)
+  }
+
   render() {
-    const { show } = this.props;
+    const { show, catalog } = this.props;
     return (
       <CSSTransition
         in={show}
@@ -28,8 +35,13 @@ class ReactProSlider extends Component {
             <MenuItem><NavLink to="/">ГЛАВНАЯ</NavLink></MenuItem>
             <MenuItem><NavLink to="/shop">НОВОСТИ И АКЦИИ</NavLink></MenuItem>
             <SubMenu title="КАТАЛОГ">
-              <MenuItem><NavLink to="/">КОНТАКТЫ</NavLink></MenuItem>
-              <MenuItem><NavLink to="/">САМОВЫВОЗ</NavLink></MenuItem>
+              {catalog.map(c => <MenuItem>
+                <NavLink
+                  onClick={()=>this.changeAttribute(c.attributeValue)}
+                  to={`/shop?каталог=${c.attributeValue}`}>
+                  {Utils.upperCase(c.attributeValue)}
+                </NavLink>
+              </MenuItem>)}
             </SubMenu>
             <MenuItem><NavLink to="/">ДОСТАВКА И ОПЛАТА</NavLink></MenuItem>
             <MenuItem><NavLink to="/">ГАРАНТИЯ</NavLink></MenuItem>
@@ -42,7 +54,9 @@ class ReactProSlider extends Component {
 }
 
 const mapStateToProps = (state) => ({});
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getProductsRequest,
+};
 
 const Container = connect(
   mapStateToProps,

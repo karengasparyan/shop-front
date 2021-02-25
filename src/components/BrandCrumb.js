@@ -20,7 +20,7 @@ class BrandCrumb extends Component {
           <div className="row">
             <div className="col-lg-12">
               <div className="breadcrumb-text">
-                <a onClick={this.redirectHome}><i className="fa fa-home"/> ГЛАВНАЯ</a>
+                <a onClick={this.redirectHome}><i className="fa fa-home"/> Главная</a>
                 <span>{crumb}</span>
               </div>
             </div>

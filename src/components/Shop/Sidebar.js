@@ -125,6 +125,11 @@ class Sidebar extends Component {
 
     this.initProductsRequest(a)
 
+    // console.log(filter.map(f=> f.name === sidebarTitles)sidebarTitles)
+
+    console.log(sidebarTitles)
+    console.log(filter)
+
     return (
       <div style={{width:'100%'}} className="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
         <div className="filter-widget">
@@ -134,7 +139,7 @@ class Sidebar extends Component {
           </div>
           {/*<Link className="filter-btn">Фильтр</Link>*/}
         </div>
-        {filter.map(f => <div className="filter-widget">
+        {(filter).map(f => <div key={f.id} className="filter-widget">
           <h4 className="fw-title">{f.attributeKey || ''}</h4>
           <ul className="filter-catagories">
             {(attributeFilter.filter(a => a.attributeKey === f.attributeKey) || []).map(c =>

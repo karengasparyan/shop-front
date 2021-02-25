@@ -88,7 +88,7 @@ class Countdown extends Component {
             <div className="cd-item"><span><AnimateOnChange>{this.leading0(seconds)}</AnimateOnChange></span><p>Secs</p>
             </div>
           </div>
-          <a onClick={() => this.addCard(p.id)} className="primary-btn">Купить сейчас</a>
+          <p onClick={() => this.addCard(p.id)} className="primary-btn-custom">Купить сейчас</p>
         </div>)}
       </>
     );

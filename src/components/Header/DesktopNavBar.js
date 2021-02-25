@@ -7,6 +7,7 @@ import {AnimateGroup, animations, AnimateOnChange} from 'react-animation'
 import {NavLink} from "react-router-dom";
 import Preloader from "../../svg/preloader.svg";
 import Utils from "../../helpers/Utils";
+import {getProductsRequest} from "../../store/actions/products";
 
 class ReactProSlider extends Component {
   static propTypes = {
@@ -23,6 +24,11 @@ class ReactProSlider extends Component {
   changeActive = id => {
     this.setState({active: id});
   };
+
+  changeAttribute = (catalog) => {
+    const query = {'каталог': catalog}
+    this.props.getProductsRequest(query)
+  }
 
   // https://stackoverflow.com/questions/55518798/how-to-add-active-class-to-clicked-item-in-reactjs
 
@@ -48,8 +54,12 @@ class ReactProSlider extends Component {
                 {show === 'catalog' && (
                   <ul className="depart-hover">
                     {catalog.map(c =>  <li key={c.id} className={+c.id === +active ? 'active' : ''}
-                  onClick={() => this.changeActive(c.id)}
-                  ><NavLink to={`/shop?каталог=${c.attributeValue}`} >{Utils.upperCase(c.attributeValue)}</NavLink>
+                  onClick={() => this.changeActive(c.id)}>
+                      <NavLink
+                        onClick={()=>this.changeAttribute(c.attributeValue)}
+                        to={`/shop?каталог=${c.attributeValue}`}>
+                      {Utils.upperCase(c.attributeValue)}
+                      </NavLink>
                   </li>)}
                   </ul>
                 )}
@@ -58,16 +68,16 @@ class ReactProSlider extends Component {
           </div>
           <nav className="nav-menu mobile-menu">
             <ul>
-              <li className={9 === active ? 'active' : ''}
-                  onClick={() => this.changeActive(9)}><NavLink to="/">ГЛАВНАЯ</NavLink></li>
-              <li className={10 === active ? 'active' : ''}
-                  onClick={() => this.changeActive(10)}><NavLink to="/shop">НОВОСТИ И АКЦИИ</NavLink></li>
-              <li className={11 === active ? 'active' : ''}
-                  onClick={() => this.changeActive(11)}>
-                <NavLink to="/">ДОСТАВКА И ОПЛАТА</NavLink>
+              <li className={1 === active ? 'active' : ''}
+                  onClick={() => this.changeActive(1)}><NavLink to="/">ГЛАВНАЯ</NavLink></li>
+              <li className={2 === active ? 'active' : ''}
+                  onClick={() => this.changeActive(2)}><NavLink to="/shop">НОВОСТИ И АКЦИИ</NavLink></li>
+              <li className={3 === active ? 'active' : ''}
+                  onClick={() => this.changeActive(3)}>
+                <NavLink to="/shipping-payment">ДОСТАВКА И ОПЛАТА</NavLink>
               </li>
-              <li className={12 === active ? 'active' : ''}
-                  onClick={() => this.changeActive(12)}><NavLink to="/">ГАРАНТИЯ</NavLink></li>
+              <li className={4 === active ? 'active' : ''}
+                  onClick={() => this.changeActive(4)}><NavLink to="/guarantee">ГАРАНТИЯ</NavLink></li>
 
               <li onMouseOver={() => showMenu('inTheShop')}>
                 <NavLink to="/contacts">О МАГАЗИНЕ</NavLink>
@@ -91,7 +101,9 @@ class ReactProSlider extends Component {
 }
 
 const mapStateToProps = (state) => ({});
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getProductsRequest,
+};
 
 const Container = connect(
   mapStateToProps,

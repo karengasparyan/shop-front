@@ -15,7 +15,8 @@ class MobileNavBar extends Component {
   };
 
   render() {
-    const {show} = this.state
+    const {show} = this.state;
+    const {catalog} = this.props;
     return (
       <div>
         <i className="contactIcon fa fa-phone"/>
@@ -30,7 +31,7 @@ class MobileNavBar extends Component {
                 </span>
           </span>
         </div>
-        <ReactProSlider show={show}/>
+        <ReactProSlider show={show} catalog={catalog}/>
       </div>
     );
   }

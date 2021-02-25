@@ -21,8 +21,8 @@ class ContactsHeader extends Component {
           </div>
           <div className="ht-right">
             <div className="top-social">
-              <a href="#"><i className="contactIcon ti-facebook"/></a>
-              <a href="#"><i className="contactIcon ti-instagram"/></a>
+              <a><i className="contactIcon ti-facebook"/></a>
+              <a href="https://www.instagram.com/kolyaskivrostove/"><i className="contactIcon ti-instagram"/></a>
             </div>
           </div>
         </div>

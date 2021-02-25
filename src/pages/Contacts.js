@@ -15,7 +15,7 @@ class Contacts extends Component {
   render() {
     return (
       <Wrapper>
-        <BrandCrumb crumb="О МАГАЗИНЕ"/>
+        <BrandCrumb crumb="О магазине"/>
         <div className="map spad">
           <div className="container">
               <iframe

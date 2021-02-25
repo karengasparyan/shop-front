@@ -32,6 +32,11 @@
     color: var(--brandColor);
     transition: 0.5s;
   }
+  &:focus {
+    color: var(--brandColor);
+    transition: 0.5s;
+  }
+
 }
 
 .contactIcon{
@@ -119,6 +124,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #1e7e34;
+
   img{
     width: 50px;
   }
@@ -128,4 +135,24 @@
   color: var(--brandColor);
   font-weight: bold;
   font-size: 14px;
+}
+
+.primary-btn-custom {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 30px;
+  color: #ffffff;
+  background: var(--brandColor);
+  text-transform: uppercase;
+}
+
+.shippingAndPaymentTitle{
+  color: #424242;
+  margin: 10px 0;
+}
+
+.guaranteeDescription{
+  margin-left: 30px;
 }

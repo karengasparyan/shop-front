@@ -110,7 +110,7 @@ class CheckOut extends Component {
 
     return (
       <Wrapper>
-        <BrandCrumb crumb="ЗАКАЗАТЬ"/>
+        <BrandCrumb crumb="Заказать"/>
         <section className="checkout-section spad">
           <div className="container">
             <form className="checkout-form">

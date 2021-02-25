@@ -103,7 +103,7 @@ class ShoppingCart extends Component {
 
     return (
       <Wrapper>
-        <BrandCrumb crumb="КОРЗИНА"/>
+        <BrandCrumb crumb="Корзина"/>
         <section className="shopping-cart spad">
           <div className="container">
             <div className="row">

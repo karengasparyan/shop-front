@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import SlickCarousel from "../Carusel/SlickCarousel";
-import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import Preloader from "../../svg/preloader.svg";
 import {getNewRequest, getProductsRequest, getSaleRequest} from "../../store/actions/products";
 

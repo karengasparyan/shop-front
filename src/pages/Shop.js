@@ -12,7 +12,7 @@ class Shop extends Component {
   render() {
     return (
       <Wrapper>
-        <BrandCrumb crumb="МАГАЗИН"/>
+        <BrandCrumb crumb="Магазин"/>
         <section className="product-shop spad">
           <div className="container">
             <div className="shopContainer">

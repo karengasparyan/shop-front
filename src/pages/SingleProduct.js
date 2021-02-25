@@ -22,7 +22,7 @@ class SingleProduct extends Component {
 
     return (
       <Wrapper>
-        <BrandCrumb crumb="МАГАЗИН"/>
+        <BrandCrumb crumb="Товар"/>
         <section className="product-shop spad page-details">
           <div className="container">
             <div className="row">

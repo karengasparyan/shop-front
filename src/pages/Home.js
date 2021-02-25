@@ -7,6 +7,7 @@ import BannerSection from "../components/Main/BannerSection";
 import SaleBanner from "../components/Main/SaleBanner";
 import CountDownSection from "../components/Main/CountDownSection";
 import {getCatalogListRequest, getImagesSliderRequest} from "../store/actions/products";
+import Preloader from "../svg/preloader.svg";
 
 class Home extends Component {
 
@@ -18,7 +19,11 @@ class Home extends Component {
   }
 
   render() {
-    const {sliderImages,catalog} = this.props;
+    const {sliderImages} = this.props;
+
+    if (!sliderImages) {
+      return <div className="preloaderContainer"><img src={Preloader} alt="preloader"/></div>
+    }
 
     return (
         <Wrapper>
