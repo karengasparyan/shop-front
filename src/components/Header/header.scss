@@ -1,0 +1,325 @@
+.mobileMenuContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: 0.5s;
+}
+
+.inner-header .advanced-search .input-group button {
+  font-size: 16px;
+  color: #ffffff;
+  position: absolute;
+  right: -135px;
+  top: 1px;
+  border: 1px solid var(--brandColor);
+  background: var(--brandColor);
+  padding: 10px 25px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.searchContainer {
+  width: 100%;
+  position: relative;
+  margin-left: 10%;
+
+  .searchLists {
+    width: 94%;
+    min-height: 100px;
+    max-height: 200px;
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 9999;
+    list-style-type: none;
+    background-color: #fff;
+    padding: 5px 25px;
+    color: #565656;
+
+    li {
+      cursor: pointer;
+      transition: 0.5s;
+
+      &:hover {
+        transition: 0.5s;
+        transform: scale(1.01);
+        color: var(--brandColor);
+      }
+      span {
+        margin-right: 7px;
+
+
+      }
+    }
+  }
+}
+
+.nav-item .nav-menu li.active a {
+  background: var(--brandColor);
+}
+
+.nav-item .nav-menu li:hover > a {
+  background: var(--brandColor);
+}
+
+.nav-item .nav-menu li .dropdown li:hover > a {
+  background: transparent;
+  color: var(--brandColor);
+}
+
+.nav-item .nav-depart .depart-btn .depart-hover li a:hover {
+  color: var(--brandColor);
+}
+
+.nav-item .nav-depart .depart-btn .depart-hover li a:hover {
+  color: var(--brandColor);
+}
+
+.nav-item .nav-depart .depart-btn .depart-hover li a:hover {
+  color: var(--brandColor);
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item:hover {
+  background-color: var(--brandColor);
+}
+
+
+.nav-item .nav-depart .depart-btn .depart-hover li.active a {
+  color: var(--brandColor);
+}
+
+.inner-header .nav-right li.cart-icon a span {
+  background: var(--brandColor);
+  color: #ffffff;
+}
+
+.inner-header .nav-right li.cart-icon .cart-hover {
+  width: max-content;
+  min-width: 215px;
+  position: absolute;
+  left: -17vw;
+  top: 40px;
+  background: #ffffff;
+  z-index: 99999;
+  text-align: left;
+  padding: 0;
+  box-shadow: 0 13px 32px rgba(51, 51, 51, 0.1);
+  transition: all 0.3s;
+}
+
+.inner-header .nav-right li.cart-icon .cart-hover .select-items table tr td.si-text {
+  padding-left: 10px;
+}
+
+.inner-header .nav-right li.cart-icon .cart-hover .select-items table tr td {
+  padding-bottom: 10px;
+}
+
+.inner-header .nav-right li.cart-icon .cart-hover .select-items table tr td.si-text .product-selected p {
+  color: var(--brandColor);
+  line-height: 30px;
+  margin-bottom: 0;
+}
+
+.inner-header .nav-right li.cart-icon .cart-hover .select-total span {
+  font-size: 14px;
+  color: var(--brandColor);
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-left: 8px;
+  float: left;
+}
+
+.inner-header .nav-right li.cart-icon .cart-hover .select-total h5 {
+  color: var(--brandColor);
+  float: right;
+  margin-right: 10px;
+}
+
+.select-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-header .nav-right li.cart-icon .cart-hover .select-button .checkout-btn {
+  margin-bottom: 10px;
+}
+
+.primary-btn {
+  background: var(--brandColor);
+}
+
+.mobileNavBtn {
+  padding: 5px 2px 3px 5px;
+  background-color: var(--brandColor);
+}
+
+.pro-sidebar {
+  .pro-sidebar-inner {
+    max-height: 0;
+    transition: max-height 300ms;
+    overflow: hidden;
+  }
+}
+
+.mobileMenu-enter-done {
+  .pro-sidebar-inner {
+    max-height: 550px;
+    height: max-content;
+  }
+}
+
+.dropdowns {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 9999;
+  background-color: #252525;
+}
+
+.dropdowns li {
+  margin-left: 0;
+}
+
+.dropdowns li NavLink {
+
+}
+
+.animation-enter {
+  opacity: 0;
+}
+
+.animation-enter-active {
+  opacity: 1;
+  visibility: visible;
+  top: 53px;
+  transition: opacity 300ms, transform 300ms;
+}
+
+.animation-exit {
+  opacity: 1;
+}
+
+.animation-exit-active {
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+
+.catalogContainer {
+  margin-left: 4%;
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-item .nav-depart {
+  float: none;
+  width: 25%;
+}
+
+.nav-item .nav-depart .depart-btn {
+  padding: 14px 48px 14px 28px;
+}
+
+.nav-item .nav-depart .depart-btn .depart-hover li a {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #000000;
+  padding: 10px 5px 0 5px;
+  transition: all 0.3s;
+}
+
+.nav-item .nav-menu li a {
+  font-size: 12px;
+  font-weight: 700;
+  display: block;
+  color: #ffffff;
+  border-right: none;
+}
+
+.nav-item .nav-menu li:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  top: 53px;
+}
+
+.nav-item .nav-menu li .dropdown li a {
+  border-right: 0;
+  padding: 8px 22px;
+  text-transform: capitalize;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item {
+  font-size: 12px;
+}
+
+.inner-header .advanced-search .input-group input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 16px;
+  color: #565656;
+  padding-left: 25px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1920px) {
+
+  .nav-item .nav-menu li a {
+    padding: 16px 40px 15px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .inner-header .advanced-search .input-group button {
+    left: 136%;
+  }
+  .nav-item .nav-menu li a {
+    padding: 16px 25px 15px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .inner-header .advanced-search .input-group button {
+    left: 136%;
+  }
+  .searchContainer {
+    margin-left: 0;
+  }
+  .nav-item .nav-menu li a {
+    padding: 16px 10px 15px;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .inner-header .advanced-search .input-group button {
+    left: 87%;
+  }
+  .nav-item .nav-depart {
+    width: 25%;
+  }
+  .nav-item .nav-menu li a {
+    padding: 16px 10px 15px;
+  }
+  .slicknav_btn {
+    right: -3%;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 576px) {
+  .inner-header .advanced-search .input-group button {
+    left: 87%;
+  }
+  .nav-item .nav-depart {
+    width: 25%;
+  }
+  .nav-item .nav-menu li a {
+    padding: 16px 10px 15px;
+  }
+  .searchContainer {
+    margin-left: -4%;
+  }
+  .slicknav_btn {
+    right: -5%;
+  }
+}

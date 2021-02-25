@@ -1,0 +1,131 @@
+:root {
+  --brandColor: rgba(255, 0, 19, 0.7);
+  --sectionBg: rgba(205, 205, 205, 0.7);
+}
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--brandColor);
+
+  &:hover {
+    background: #585858;
+    cursor: pointer;
+  }
+}
+
+.ContactTel{
+  color: #3d3d3d;
+  transition: 0.5s;
+  font-weight: bold;
+  &:hover {
+    color: var(--brandColor);
+    transition: 0.5s;
+  }
+}
+
+.contactIcon{
+  margin: 5px;
+  font-size: 16px;
+}
+.saleBannerSliderContainer {
+  padding-top: 10%;
+}
+
+.sectionBackground {
+  background-color: var(--sectionBg);
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #5c5c5c;
+  transition: 1s;
+  font-size: 25px;
+}
+
+.slick-prev {
+  left: 20px;
+  z-index: 9999;
+}
+
+.slick-next {
+  right: 20px;
+  z-index: 9999;
+
+}
+
+.countDownSection {
+  background-color: #f3f0e5;
+}
+
+.guaranteeContainerColor{
+  background-color: #303030;
+  margin-bottom: 50px;
+  .guaranteeContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0 10px 0;
+    justify-content: space-around;
+    .guarantee {
+      display: flex;
+      width: 25%;
+      justify-content: center;
+      align-items: center;
+      vertical-align: middle;
+      padding: 15px;
+      img{
+        margin: 10px;
+      }
+      p{
+        margin: 0;
+      }
+    }
+  }
+}
+.compTitle {
+  width: max-content;
+  margin: 0 0 12px 0;
+  font-weight: bold;
+  color: #4b4b4b;
+  border-bottom: var(--brandColor) solid 3px;
+  padding-bottom: 2px;
+}
+.shopContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.product-list {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.preloaderContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img{
+    width: 50px;
+  }
+}
+
+.inputValidationError{
+  color: var(--brandColor);
+  font-weight: bold;
+  font-size: 14px;
+}
