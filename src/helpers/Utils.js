@@ -50,6 +50,19 @@ class Utils {
       return text
     }
   }
+
+  static filterArrayOrder(sidebar, filter) {
+    let array = [];
+      for (let i = 0; i < sidebar?.length; i++) {
+        for (let j = 0; j < filter?.length; j++) {
+          if (sidebar[i]?.title === filter[j]?.attributeKey) {
+            array.push(filter[j])
+          }
+        }
+      }
+      return array;
+  }
+
 }
 
 export default Utils;

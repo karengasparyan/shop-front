@@ -152,17 +152,17 @@ class ShoppingCart extends Component {
                     </tbody>
                   </table>}
                 </div>
-                <div className="row">
+                {!_.isEmpty(cardProducts) && <div className="row">
                   <div className="col-lg-12 offset-lg-12">
                     <div className="proceed-checkout">
                       <ul>
                         <li className="cart-total">ИТОГОВАЯ СУММА <span>{`₽ ${totalPrice}`}</span></li>
                       </ul>
-                      {!_.isEmpty(cardProducts) &&
-                      <Link to="/check-out" className="proceed-btn">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</Link>}
+
+                      <Link to="/check-out" className="proceed-btn">ПЕРЕЙТИ К ОФОРМЛЕНИЮ ЗАКАЗА</Link>
                     </div>
                   </div>
-                </div>
+                </div>}
               </div>
             </div>
           </div>

@@ -103,7 +103,8 @@ class Products extends Component {
                   </div>
                 </div>
                 <div className="pi-text">
-                  {p.attributes.filter(a => a.attributeKey !== 'status' && a.attributeKey !== 'seo').map(a =>
+                  {p.attributes.filter(a => a.attributeKey !== 'положение' && a.attributeKey !== 'seo' &&
+                  a.attributeKey !== 'секция комплектация').map(a =>
                     <div className="catagory-name">{a.attributeValue}</div>)}
                   <a href="#">
                     <h5>{p.name}</h5>

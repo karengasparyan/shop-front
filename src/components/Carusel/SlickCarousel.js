@@ -74,7 +74,7 @@ class SlickCarousel extends Component {
 
   render() {
     const {activeText, animation, showBuyMenu} = this.state;
-    const {images, slidesToShow, arrows, product, homeSlider, match: {params}} = this.props;
+    const {images, slidesToShow, arrows, product, homeSlider, match: {params}, openModal} = this.props;
     if (!images) {
       return <div className="preloaderContainer"><img src={Preloader} alt="preloader"/></div>
     }
@@ -92,7 +92,7 @@ class SlickCarousel extends Component {
     if (product) {
       return <section className="slickSection">
         <Slider {...settings}>
-          {images.map(i => <div key={i.id}>
+          {images.map(i => <div onClick={openModal} key={i.id}>
             <img style={{width: '100%', height: '100%'}}
                  src={`${direction}/productImage/${params.id}/${i.path}`}
                  alt={`image_${i.id}`}/>

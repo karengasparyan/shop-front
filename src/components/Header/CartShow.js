@@ -144,7 +144,7 @@ class CartShow extends Component {
         </div>
         {!_.isEmpty(cardProducts) && <div className="select-total">
           <span>Итоговая сумма:</span>
-          <h5>{totalPrice}</h5>
+          <h5>{`₽ ${totalPrice}`}</h5>
         </div>}
         {!_.isEmpty(cardProducts) && <div className="select-button">
           <Link to="/shopping-cart" className="primary-btn view-card">ПОСМОТРЕТЬ</Link>

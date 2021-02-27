@@ -7,6 +7,8 @@ import {AnimateGroup} from "react-animation";
 import memoizeOne from "memoize-one";
 import {getCardListRequest, singleProductsRequest} from "../../store/actions/products";
 import SlickCarousel from "../Carusel/SlickCarousel";
+import modalCustomStyle from '../../assets/styles/modal';
+import Modal from 'react-modal';
 import classnames from "classnames";
 import Utils from "../../helpers/Utils";
 import {toast} from "react-toastify";
@@ -23,6 +25,8 @@ class Product extends Component {
       showBuyMenu: '',
       singleCount: [],
       value: 1,
+      disabled: 'disabled',
+      openModal: false,
     }
   }
 
@@ -98,6 +102,7 @@ class Product extends Component {
     window.localStorage.setItem("cardIds", JSON.stringify(cardIds));
     cardIds = _.uniq(cardIds);
     this.props.getCardListRequest(cardIds);
+    this.setState({disabled: ''})
     toast.success('Товар добавлен в корзину')
   }
 
@@ -107,9 +112,15 @@ class Product extends Component {
     }
   }, _.isEqual)
 
+  openModal = () => {
+    const {openModal} = this.state;
+    console.log('aaaaaaaaaaaaaaaa')
+    this.setState({openModal: !openModal,})
+  }
+
   render() {
     const {singleProduct, match: {params}, cardProducts} = this.props;
-    const {showSliderArrows, activeTab, showBuyMenu} = this.state;
+    const {showSliderArrows, activeTab, showBuyMenu, disabled, openModal} = this.state;
 
     if (!singleProduct) {
       return <div className="preloaderContainer"><img src={Preloader} alt="preloader"/></div>
@@ -138,7 +149,7 @@ class Product extends Component {
             onMouseOver={() => this.showSliderArrows(true)}
             onMouseLeave={() => this.showSliderArrows(false)}
             className="col-lg-6">
-            <SlickCarousel images={singleProduct.images} arrows={showSliderArrows} product={true}/>
+            <SlickCarousel openModal={this.openModal} images={singleProduct.images} arrows={showSliderArrows} product={true}/>
           </div>
           <div className="col-lg-6">
             <div className="product-details">
@@ -157,7 +168,7 @@ class Product extends Component {
                     value={value}
                     onClick={() => this.setCountProduct(singleProduct.id)}
                     onChange={this.handleChange}
-                    disabled="disabled"
+                    disabled={disabled}
                   />}
                 </div>
                 <Link className="primary-btn pd-cart"
@@ -241,7 +252,8 @@ class Product extends Component {
                               </div>
                             </div>
                             <div className="pi-text">
-                              {p.attributes.filter(a => a.attributeKey !== 'status' && a.attributeKey !== 'seo').map(a =>
+                              {p.attributes.filter(a => a.attributeKey !== 'положение' && a.attributeKey !== 'seo' &&
+                                a.attributeKey !== 'секция комплектация').map(a =>
                                 <div className="catagory-name">{a.attributeValue}</div>)}
                               <a href="#">
                                 <h5>{p.name}</h5>
@@ -252,6 +264,18 @@ class Product extends Component {
                               </div>
                             </div>
                           </div>
+                          <Modal
+                            closeTimeoutMS={500}
+                            isOpen={openModal}
+                            onRequestClose={this.openModal}
+                            contentLabel="Images"
+                            style={modalCustomStyle}
+                          >
+                            <div className="sliderImagesContainer">
+                              <span className="closeModal" onClick={this.openModal}>x</span>
+                            </div>
+                            <SlickCarousel images={singleProduct.images} product={true} arrows={true}/>
+                          </Modal>
                         </div>)}
                     </div>
                   </div>
@@ -271,7 +295,7 @@ class Product extends Component {
                   <table>
                     <tbody>
                     {singleProduct?.attributes?.filter(f =>
-                      f.attributeKey.toLowerCase() !== 'seo' && f.attributeKey.toLowerCase() !== 'status').map(a => <tr>
+                      f.attributeKey.toLowerCase() !== 'seo' && f.attributeKey.toLowerCase() !== 'положение').map(a => <tr>
                       <td className="p-catagory">{a.attributeKey}</td>
                       <td>
                         <div className="p-code">{a.attributeValue}</div>

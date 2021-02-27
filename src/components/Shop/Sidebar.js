@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Link, withRouter } from "react-router-dom";
+import React, {Component, Fragment} from 'react';
+import {connect} from 'react-redux';
+import {Link, withRouter} from "react-router-dom";
 import Slider from "./SliderPrice";
 import {
   getFilterListRequest,
@@ -11,6 +11,8 @@ import _ from "lodash";
 import memoizeOne from "memoize-one";
 import queryString from 'query-string';
 import {object} from "prop-types";
+import Utils from "../../helpers/Utils";
+import {withMobileDialog} from "@material-ui/core";
 
 class Sidebar extends Component {
   static propTypes = {}
@@ -25,9 +27,9 @@ class Sidebar extends Component {
   }
 
   componentDidMount() {
-    let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
+    let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
     if (query) {
-      this.setState({ search: query.s })
+      this.setState({search: query.s})
       this.props.getProductsRequest(query);
     }
     this.props.getSidebarTitlesRequest();
@@ -43,7 +45,7 @@ class Sidebar extends Component {
 
   initProductsRequest = memoizeOne((params) => {
     window.scrollTo(0, 150)
-    let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
+    let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
     if (_.isEmpty(params)) {
       this.props.getProductsRequest(query);
     }
@@ -51,9 +53,9 @@ class Sidebar extends Component {
 
   changeFilter = (key, value) => {
 
-    let { history } = this.props;
+    let {history} = this.props;
 
-    let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
+    let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
 
     if (!query[key]) {
       query[key] = [];
@@ -67,11 +69,11 @@ class Sidebar extends Component {
       query[key].push(value)
     }
 
-    if (query){
+    if (query) {
       delete query.price;
     }
 
-    const str = queryString.stringify(query, { arrayFormat: 'comma' });
+    const str = queryString.stringify(query, {arrayFormat: 'comma'});
 
     history.replace('?' + str)
 
@@ -80,20 +82,20 @@ class Sidebar extends Component {
   }
 
   handleChange = (value) => {
-    let { history } = this.props
+    let {history} = this.props
 
-    let query = queryString.parse(window.location.search, );
+    let query = queryString.parse(window.location.search,);
     if (query) {
       query.price = value;
-      history.replace('?' + queryString.stringify(query, ))
+      history.replace('?' + queryString.stringify(query,))
       this.props.getProductsRequest(query)
-      this.setState({ value })
+      this.setState({value})
     }
   }
 
   inputChange = (ev, index) => {
-    let { value } = this.state;
-    let { history } = this.props;
+    let {value} = this.state;
+    let {history} = this.props;
     for (let i = 0; i < value.length; i++) {
       if (+ev.target.value !== -1) {
         value[index] = +ev.target.value;
@@ -107,39 +109,37 @@ class Sidebar extends Component {
 
     this.props.getProductsRequest(query)
 
-    this.setState({ value })
+    this.setState({value})
   }
 
   render() {
-    const { attributeFilter, sidebarTitles, products } = this.props;
-    const { value } = this.state;
+    const {attributeFilter, sidebarTitles, products} = this.props;
+    const {value} = this.state;
     let filter = [];
     if (!_.isEmpty(sidebarTitles)) {
       this.initTitles(sidebarTitles)
       filter = _.uniqBy(attributeFilter, 'attributeKey')
     }
 
-    let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
+    let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
 
-    const { s, price, ...a } = query;
+    const {s, price, ...a} = query;
 
     this.initProductsRequest(a)
 
-    // console.log(filter.map(f=> f.name === sidebarTitles)sidebarTitles)
-
-    console.log(sidebarTitles)
     console.log(filter)
+    console.log(sidebarTitles)
 
     return (
-      <div style={{width:'100%'}} className="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+      <div style={{width: '100%'}} className="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
         <div className="filter-widget">
           <h4 className="fw-title">Цена</h4>
           <div className="filter-range-wrap">
-            <Slider value={value} inputChange={(ev, i) => this.inputChange(ev, i)} onChange={this.handleChange} />
+            <Slider value={value} inputChange={(ev, i) => this.inputChange(ev, i)} onChange={this.handleChange}/>
           </div>
           {/*<Link className="filter-btn">Фильтр</Link>*/}
         </div>
-        {(filter).map(f => <div key={f.id} className="filter-widget">
+        {Utils.filterArrayOrder(sidebarTitles, filter).map(f => <div key={f.id} className="filter-widget">
           <h4 className="fw-title">{f.attributeKey || ''}</h4>
           <ul className="filter-catagories">
             {(attributeFilter.filter(a => a.attributeKey === f.attributeKey) || []).map(c =>
@@ -154,7 +154,7 @@ class Sidebar extends Component {
                         id={`c_${c.id}`}
                         checked={_.isArray(query[c.attributeKey]) ? query[c.attributeKey]?.includes(c.attributeValue) : query[c.attributeKey] === c.attributeValue}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark"/>
                     </label>
                   </div>
                 </div>
