@@ -1,9 +1,9 @@
-export const INIT_PRODUCTS = 'INIT_PRODUCTS';
+export const INIT_PAGE = 'INIT_PAGE';
 
-export function initProducts (initProducts, page) {
+export function setPage (page) {
   return {
-    type: INIT_PRODUCTS,
-    payload: { initProducts, page },
+    type: INIT_PAGE,
+    payload: { page },
   };
 }
 

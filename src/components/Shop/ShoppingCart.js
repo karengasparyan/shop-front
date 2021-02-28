@@ -125,7 +125,7 @@ class ShoppingCart extends Component {
                         <img src={`${direction}/productImage/${p.id}/${p?.images[0]?.path}`} alt={`image_${p.id}`}/>
                       </td>
                       <td className="cart-title first-row">
-                        <h5>{p.name}</h5>
+                        <h5>{Utils.sliceText(p.name,40)}</h5>
                       </td>
                       <td className="p-price first-row">{`₽ ${p.salePrice}`}</td>
                       <td className="qua-col first-row">
@@ -137,6 +137,8 @@ class ShoppingCart extends Component {
                               value={singleCount.map((c) => c[p.id]).filter(u => u !== undefined)[0]}
                               onClick={() => this.setCountProduct(p.id)}
                               onChange={this.handleChange}
+                              min={0}
+                              max={p.qty}
                             />
                           </div>
                         </div>

@@ -22,6 +22,7 @@ import './components/Header/header.scss';
 import './assets/styles/rcSlider.scss';
 import './assets/styles/toastyfy.scss';
 import './assets/styles/react-tabs.css';
+import './assets/styles/image-gallery.scss';
 import './assets/styles/custom.scss';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

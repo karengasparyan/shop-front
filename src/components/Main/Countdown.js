@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
 import {AnimateOnChange} from 'react-animation'
-import _ from "lodash";
-import {toast} from "react-toastify";
 import {getCardListRequest} from "../../store/actions/products";
+import Utils from "../../helpers/Utils";
 
 class Countdown extends Component {
 
@@ -18,19 +16,20 @@ class Countdown extends Component {
       seconds: 0,
     };
     this.interval = null;
+    this.timeout = null;
   }
 
   componentDidMount() {
-    const deadline = this.props.weekSale.map(w =>
-      w.attributes.find(a => a.attributeKey === 'акция недели'))[0].attributeValue;
-    if (deadline) {
+    const {deadline} = this.props;
+   this.timeout = setTimeout(() => {
       this.getTimeUntil(deadline);
       this.getTimeUntilInterval(deadline)
-    }
+    }, 200)
   }
 
   componentWillUnmount() {
     clearInterval(this.interval)
+    clearInterval(this.timeout)
   }
 
   getTimeUntilInterval = (deadline) => {
@@ -52,15 +51,6 @@ class Countdown extends Component {
       const days = Math.floor(time / (1000 * 60 * 60 * 24));
       this.setState({days, hours, minutes, seconds});
     }
-  }
-
-  addCard = (id) => {
-    let cardIds = JSON.parse(window.localStorage.getItem("cardIds")) || [];
-    cardIds.push(id);
-    window.localStorage.setItem("cardIds", JSON.stringify(cardIds));
-    cardIds = _.uniq(cardIds);
-    this.props.getCardListRequest(cardIds);
-    toast.success('Товар добавлен в корзину')
   }
 
   render() {
@@ -88,17 +78,25 @@ class Countdown extends Component {
             <div className="cd-item"><span><AnimateOnChange>{this.leading0(seconds)}</AnimateOnChange></span><p>Secs</p>
             </div>
           </div>
-          <p onClick={() => this.addCard(p.id)} className="primary-btn-custom">Купить сейчас</p>
+          {p.qty > 0 ? <p
+              onClick={() => Utils.addCard(p.id,this.props.getCardListRequest)}
+              className="primary-btn-custom">Купить сейчас</p> :
+            <p
+              className="primary-btn-custom">
+              Все продоно!</p>}
         </div>)}
       </>
     );
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  weekSale: state.products.weekSale,
+
+});
 const mapDispatchToProps = {
   getCardListRequest,
-  };
+};
 
 const Container = connect(
   mapStateToProps,

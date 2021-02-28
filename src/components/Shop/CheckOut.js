@@ -183,7 +183,7 @@ class CheckOut extends Component {
                         <li>Товары <span>ИТОГОВАЯ СУММА</span></li>
                         {cardProducts.map((p) => <li key={p.id}
                                                      className="fw-normal">
-                          {`${p.name} X ${singleCount.map((c) => c[p.id]).filter(u => u !== undefined)[0]}`}
+                          {`${Utils.sliceText(p.name,40)} X ${singleCount.map((c) => c[p.id]).filter(u => u !== undefined)[0]}`}
                           <span>
                             {`₽ ${p.salePrice * singleCount.map((c) => c[p.id]).filter(u => u !== undefined)[0]}`}
                           </span>

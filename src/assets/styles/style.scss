@@ -724,6 +724,13 @@ ol {
 .nav-item .nav-depart .depart-btn .depart-hover li.active a {
   color: var(--brandColor);
 }
+.nav-menu ul li a.active {
+  background-color: var(--brandColor);
+}
+
+.depart-hover ul li a.active {
+  background-color: var(--brandColor);
+}
 
 .nav-item .nav-depart .depart-btn .depart-hover li a {
   display: block;

@@ -1,73 +1,43 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import queryString from "query-string";
-import memoizeOne from "memoize-one";
-import _ from "lodash";
-import { initProducts } from "../../store/actions/reduxSetState";
-import { getProductsRequest } from "../../store/actions/products";
+import {getProductsRequest} from "../../store/actions/products";
 import {withRouter} from "react-router-dom";
-import Utils from "../../helpers/Utils";
+import {setPage} from "../../store/actions/reduxSetState";
 
 class LoadingMore extends Component {
   constructor(props) {
     super(props);
     this.state = {
       page: 1,
-      initProducts: [],
     }
     this.scrollBottom = React.createRef();
   }
 
-
-  initProducts = memoizeOne((products, page) => {
-    let {initProducts, y} = this.state;
-    let {history} = this.props;
-    let query = queryString.parse(window.location.search);
-
-    if (products) {
-      if (query){
-        delete query.price;
-
-        if (query.s === ''){
-          delete query.s;
-        }
-
-      }
-      history.replace(`?${queryString.stringify(query)}`)
-      initProducts = [...products, ...initProducts]
-      initProducts = _.uniqBy(initProducts, 'id');
-      initProducts = _.orderBy(initProducts, ['id'], ['asc']);
-
-      this.setState({initProducts})
-      this.props.initProducts(initProducts, page)
-    }
-  }, _.isEqual)
-
-  loadMore = () => {
-    let { page } = this.state;
-    const {productCount} = this.props;
+  loadMore = (ev) => {
+    ev.preventDefault();
+    let {page, setPage} = this.props;
+    const {productCount, history} = this.props;
     const {current} = this.scrollBottom;
     let query = queryString.parse(window.location.search);
 
-    current.scrollIntoView({ block: "center", behavior: "smooth" });
-
     if (page < productCount) {
       page++;
-      this.setState({page})
-      query.page = page;
-      this.props.getProductsRequest(query)
+      setPage(page);
+      this.props.getProductsRequest({...query, page})
+      current.scrollIntoView({block: "center", behavior: "smooth"});
+      // history.push('?' + queryString.stringify({...query, page}))
     }
-
   }
 
   render() {
-    const {products, productsRequestStatus, productCount} = this.props
-    const {page} = this.state
-    this.initProducts(products, page)
-    if (+page === +productCount - 1 || +productCount === 1){
+    const {productsRequestStatus, productCount} = this.props
+    const {page} = this.props
+    if (page && +page >= +productCount) {
       return null
     }
 
+    console.log(productCount)
     return (
       <div className="loading-more" ref={this.scrollBottom}>
         {productsRequestStatus === 'request' && <i className="icon_loading"/>}
@@ -78,13 +48,13 @@ class LoadingMore extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products.products,
   productCount: state.products.productCount,
   productsRequestStatus: state.products.productsRequestStatus,
+  page: state.products.page,
 });
 const mapDispatchToProps = {
   getProductsRequest,
-  initProducts,
+  setPage,
 };
 
 const Container = connect(

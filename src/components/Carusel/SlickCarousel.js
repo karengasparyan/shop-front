@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import _ from "lodash";
 import {toast} from "react-toastify";
+import Utils from "../../helpers/Utils";
 // import styles from '../../helpers/AnimationStyles'
 
 // https://react-slick.neostack.com/docs/example/simple-slider
@@ -59,15 +60,6 @@ class SlickCarousel extends Component {
   //   clearInterval(this.interval)
   // }
 
-  addCard = (id) => {
-    let cardIds = JSON.parse(window.localStorage.getItem("cardIds")) || [];
-    cardIds.push(id);
-    window.localStorage.setItem("cardIds", JSON.stringify(cardIds));
-    cardIds = _.uniq(cardIds);
-    this.props.getCardListRequest(cardIds);
-    toast.success('Товар добавлен в корзину')
-  }
-
   showBuyMenu = (showBuyMenu) => {
     this.setState({showBuyMenu})
   }
@@ -114,7 +106,7 @@ class SlickCarousel extends Component {
                 <AnimateGroup animation="bounce">
                   {+showBuyMenu === +i.id && <ul>
                     {i.qty > 0 && <li className="w-icon active">
-                      <a onClick={() => this.addCard(i.id)}>
+                      <a onClick={() => Utils.addCard(i.id,this.props.getCardListRequest)}>
                         <i className="icon_bag_alt"/></a>
                     </li>}
                     <li className="quick-view"><Link to={`/product/${i.id}`}>Просмотр</Link></li>

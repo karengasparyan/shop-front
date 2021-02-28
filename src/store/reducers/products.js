@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {
   CREATE_ORDER_FAIL,
   CREATE_ORDER_REQUEST,
@@ -42,12 +43,11 @@ import {
   SINGLE_PRODUCTS_SUCCESS,
 } from "../actions/products";
 import Utils from "../../helpers/Utils";
-import {INIT_PRODUCTS, SET_TOTAL_PRICE} from "../actions/reduxSetState";
+import {INIT_PAGE, SET_TOTAL_PRICE} from "../actions/reduxSetState";
 
 const initialState = {
   products: [],
   product: {},
-  initProducts: [],
   singleProduct: {},
   productsKeys: [],
   productCount: null,
@@ -55,7 +55,7 @@ const initialState = {
   attributeValue: [],
   attributeFilter: [],
   price: {},
-  page: null,
+  page: 1,
   cardProducts: [],
   totalPrice: 0,
   sliderImages: [],
@@ -68,25 +68,25 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS_REQUEST: {
-      const {page} = action.payload;
+      const { page = 1 } = action.payload.query;
       return {
         ...state,
         productsRequestStatus: 'request',
         paginationActivePage: page,
+        products: page === 1 ? [] : state.products
       };
     }
     case GET_PRODUCTS_SUCCESS: {
-      const {products, productCount} = action.payload.data;
-
+      const { products, productCount } = action.payload.data;
       return {
         ...state,
         productsRequestStatus: 'success',
-        products,
+        products: _.uniqBy([...state.products, ...products], 'id'),
         productCount,
       };
     }
     case GET_PRODUCTS_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         productsRequestStatus: 'fail',
@@ -101,7 +101,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_SALE_SUCCESS: {
-      const {products} = action.payload.data;
+      const { products } = action.payload.data;
 
       return {
         ...state,
@@ -109,7 +109,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_SALE_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -123,7 +123,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_NEW_SUCCESS: {
-      const {products} = action.payload.data;
+      const { products } = action.payload.data;
 
       return {
         ...state,
@@ -131,7 +131,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_NEW_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -145,7 +145,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_EQUIPMENT_SUCCESS: {
-      const {products} = action.payload.data;
+      const { products } = action.payload.data;
 
       return {
         ...state,
@@ -153,7 +153,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_EQUIPMENT_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -167,7 +167,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_WEEK_SALE_SUCCESS: {
-      const {products} = action.payload.data;
+      const { products } = action.payload.data;
 
       return {
         ...state,
@@ -175,23 +175,22 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_WEEK_SALE_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
       };
     }
 
-    case INIT_PRODUCTS: {
-      const {initProducts, page} = action.payload;
+    case INIT_PAGE: {
+      const { page } = action.payload;
       return {
         ...state,
-        initProducts,
         page,
       };
     }
     case SET_TOTAL_PRICE: {
-      const {totalPrice} = action.payload;
+      const { totalPrice } = action.payload;
       return {
         ...state,
         totalPrice,
@@ -205,14 +204,14 @@ export default function reducer(state = initialState, action) {
       };
     }
     case SINGLE_PRODUCTS_SUCCESS: {
-      const {singleProduct} = action.payload.data;
+      const { singleProduct } = action.payload.data;
       return {
         ...state,
         singleProduct,
       };
     }
     case SINGLE_PRODUCTS_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -226,7 +225,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_ATTRIBUTES_SUCCESS: {
-      const {attributeKey, attributeValue} = action.payload.data;
+      const { attributeKey, attributeValue } = action.payload.data;
       return {
         ...state,
         attributeKey,
@@ -234,7 +233,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_ATTRIBUTES_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -248,14 +247,14 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_FILTER_LIST_SUCCESS: {
-      const {attributeFilter} = action.payload.data;
+      const { attributeFilter } = action.payload.data;
       return {
         ...state,
         attributeFilter,
       };
     }
     case GET_FILTER_LIST_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -269,14 +268,14 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_PRICE_MIN_MAX_SUCCESS: {
-      const {price} = action.payload.data;
+      const { price } = action.payload.data;
       return {
         ...state,
         price,
       };
     }
     case GET_PRICE_MIN_MAX_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -288,7 +287,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_SIDEBAR_TITLES_SUCCESS: {
-      const {sidebarTitles} = action.payload.data;
+      const { sidebarTitles } = action.payload.data;
       return {
         sidebarTitles,
         test: sidebarTitles,
@@ -296,7 +295,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_SIDEBAR_TITLES_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -309,7 +308,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_CARD_LIST_SUCCESS: {
-      const {cardProducts} = action.payload.data;
+      const { cardProducts } = action.payload.data;
 
       return {
         ...state,
@@ -317,7 +316,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_CARD_LIST_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -337,7 +336,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case CREATE_ORDER_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -352,14 +351,14 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_IMAGE_SLIDER_SUCCESS: {
-      const {sliderImages} = action.payload.data;
+      const { sliderImages } = action.payload.data;
       return {
         ...state,
         sliderImages,
       };
     }
     case GET_IMAGE_SLIDER_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,
@@ -373,14 +372,14 @@ export default function reducer(state = initialState, action) {
       };
     }
     case GET_CATALOG_LIST_SUCCESS: {
-      const {catalog} = action.payload.data;
+      const { catalog } = action.payload.data;
       return {
         ...state,
         catalog,
       };
     }
     case GET_CATALOG_LIST_FAIL: {
-      const {message} = action.payload.data;
+      const { message } = action.payload.data;
       return {
         ...state,
         error: message,

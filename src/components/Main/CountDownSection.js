@@ -4,6 +4,9 @@ import _ from 'lodash';
 import Countdown from "./Countdown";
 import {getWeekSaleRequest} from "../../store/actions/products";
 import Preloader from "../../svg/preloader.svg";
+import Utils from "../../helpers/Utils";
+import memoizeOne from "memoize-one";
+import {isElement} from "react-dom/test-utils";
 
 class CountDownSection extends Component {
   componentDidMount() {
@@ -20,13 +23,16 @@ class CountDownSection extends Component {
 
     const direction = process.env.REACT_APP_API_URL;
 
+    const deadline = this.props.weekSale?.map(w => w.attributes.find(a =>
+      a.attributeKey === 'акция недели'))[0]?.attributeValue;
+
     return (
       <section className="deal-of-week set-bg spad countDownSection">
         <div className="container d-flex">
-          {!_.isEmpty(weekSale) && weekSale && <Countdown weekSale={weekSale}/>}
+          {deadline && <Countdown deadline={deadline}/>}
           {weekSale.map(p => <div key={p.id} className="col-lg-6 text-center">
             <img src={`${direction}/productImage/${p.id}/${p?.images[0]?.path}`} alt={`image_${p.id}`}/>
-            <p>{p.name}</p>
+            <p>{Utils.sliceText(p.name, 30)}</p>
           </div>)}
         </div>
       </section>

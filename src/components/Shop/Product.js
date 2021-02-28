@@ -12,6 +12,7 @@ import Modal from 'react-modal';
 import classnames from "classnames";
 import Utils from "../../helpers/Utils";
 import {toast} from "react-toastify";
+import ImageGallery from 'react-image-gallery';
 import {setTotalPrice} from "../../store/actions/reduxSetState";
 
 class Product extends Component {
@@ -97,13 +98,8 @@ class Product extends Component {
   }
 
   addCard = (id) => {
-    let cardIds = JSON.parse(window.localStorage.getItem("cardIds")) || [];
-    cardIds.push(id);
-    window.localStorage.setItem("cardIds", JSON.stringify(cardIds));
-    cardIds = _.uniq(cardIds);
-    this.props.getCardListRequest(cardIds);
+    Utils.addCard(id,this.props.getCardListRequest)
     this.setState({disabled: ''})
-    toast.success('Товар добавлен в корзину')
   }
 
   initTotalPrice = memoizeOne((cardProducts, singleCount, totalPrice) => {
@@ -142,20 +138,27 @@ class Product extends Component {
 
     const value = singleCount.map((c) => c[singleProduct.id]).filter(u => u !== undefined)[0] || 1;
 
+    const images = [];
+    singleProduct.images.map(i => images.push({
+        original: `${direction}/productImage/${params.id}/${i.path}`,
+        thumbnail: `${direction}/productImage/${params.id}/${i.path}`,
+    }))
+
     return (
       <div className="col-lg-9">
         <div className="row">
           <div
-            onMouseOver={() => this.showSliderArrows(true)}
-            onMouseLeave={() => this.showSliderArrows(false)}
+            // onMouseOver={() => this.showSliderArrows(true)}
+            // onMouseLeave={() => this.showSliderArrows(false)}
             className="col-lg-6">
-            <SlickCarousel openModal={this.openModal} images={singleProduct.images} arrows={showSliderArrows} product={true}/>
+            {/*<SlickCarousel openModal={this.openModal} images={singleProduct.images} arrows={showSliderArrows} product={true}/>*/}
+          <ImageGallery items={images}  />
           </div>
           <div className="col-lg-6">
             <div className="product-details">
               <div className="pd-title">
                 <span>{singleProduct?.attributes?.find(a => a.attributeKey.toLowerCase() === 'цвет')?.attributeValue}</span>
-                <h3>{singleProduct?.name}</h3>
+                <h3>{Utils.sliceText(singleProduct?.name,25)}</h3>
               </div>
               <div className="pd-desc">
                 <p>{singleProduct.shortDescription}</p>
@@ -169,9 +172,11 @@ class Product extends Component {
                     onClick={() => this.setCountProduct(singleProduct.id)}
                     onChange={this.handleChange}
                     disabled={disabled}
+                    min={0}
+                    max={singleProduct.qty}
                   />}
                 </div>
-                <Link className="primary-btn pd-cart"
+                <Link to={`/product/${singleProduct.id}`} className="primary-btn pd-cart"
                        onClick={() => this.addCard(singleProduct.id)}
                 >в корзину</Link>
               </div>}
@@ -230,7 +235,7 @@ class Product extends Component {
                               <AnimateGroup animation="bounce">
                                 {+showBuyMenu === +p.id && <ul>
                                   {p.qty > 0 && <li className="w-icon active">
-                                    <a onClick={() => this.addCard(p.id)}>
+                                    <a onClick={() => Utils.addCard(p.id,this.props.getCardListRequest)}>
                                       <i className="icon_bag_alt"/></a>
                                   </li>}
                                   <li className="quick-view"><Link to={`/product/${p.id}`}>Просмотр</Link></li>

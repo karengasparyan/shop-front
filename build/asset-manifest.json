@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ce9937b4.chunk.css",
+    "main.js": "/static/js/main.d64c9d54.chunk.js",
+    "main.js.map": "/static/js/main.d64c9d54.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.647ca05a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.647ca05a.js.map",
+    "static/css/2.9516969b.chunk.css": "/static/css/2.9516969b.chunk.css",
+    "static/js/2.355755d7.chunk.js": "/static/js/2.355755d7.chunk.js",
+    "static/js/2.355755d7.chunk.js.map": "/static/js/2.355755d7.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.ae252d35bd863927f37fa4de8d577c52.js": "/precache-manifest.ae252d35bd863927f37fa4de8d577c52.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.9516969b.chunk.css.map": "/static/css/2.9516969b.chunk.css.map",
+    "static/css/main.ce9937b4.chunk.css.map": "/static/css/main.ce9937b4.chunk.css.map",
+    "static/js/2.355755d7.chunk.js.LICENSE.txt": "/static/js/2.355755d7.chunk.js.LICENSE.txt",
+    "static/media/elegant-icons.css": "/static/media/ElegantIcons.fdd9e757.woff",
+    "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.fee66e71.woff",
+    "static/media/preloader.svg": "/static/media/preloader.94efe92f.svg",
+    "static/media/preloader2.svg": "/static/media/preloader2.306b47fc.svg",
+    "static/media/themify-icons.css": "/static/media/themify.e23a7dca.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.647ca05a.js",
+    "static/css/2.9516969b.chunk.css",
+    "static/js/2.355755d7.chunk.js",
+    "static/css/main.ce9937b4.chunk.css",
+    "static/js/main.d64c9d54.chunk.js"
+  ]
+}

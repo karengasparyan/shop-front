@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {toast} from "react-toastify";
 
 class Utils {
   static upperCase(string) {
@@ -62,7 +63,14 @@ class Utils {
       }
       return array;
   }
-
+  static addCard(id, request) {
+    let cardIds = JSON.parse(window.localStorage.getItem("cardIds")) || [];
+    cardIds.push(id);
+    window.localStorage.setItem("cardIds", JSON.stringify(cardIds));
+    cardIds = _.uniq(cardIds);
+    request(cardIds);
+    toast.success('Товар добавлен в корзину')
+  }
 }
 
 export default Utils;

@@ -7,6 +7,7 @@ import _ from "lodash";
 import {AnimateGroup} from "react-animation";
 import memoizeOne from "memoize-one";
 import {toast} from "react-toastify";
+import Utils from "../../helpers/Utils";
 
 class RelatedProducts extends Component {
   static propTypes = {}
@@ -42,15 +43,6 @@ class RelatedProducts extends Component {
       this.props.getProductsRequest(query)
     }
   }, _.isEqual)
-
-  addCard = (id) => {
-    let cardIds = JSON.parse(window.localStorage.getItem("cardIds")) || [];
-    cardIds.push(id);
-    window.localStorage.setItem("cardIds", JSON.stringify(cardIds));
-    cardIds = _.uniq(cardIds);
-    this.props.getCardListRequest(cardIds);
-    toast.success('Товар добавлен в корзину')
-  }
 
   render() {
     const {singleProduct, products, match: {params}} = this.props;
@@ -90,7 +82,7 @@ class RelatedProducts extends Component {
                   <AnimateGroup animation="bounce">
                     {+showBuyMenu === +p.id && <ul>
                       {p.qty > 0 && <li className="w-icon active">
-                        <a onClick={() => this.addCard(p.id)}>
+                        <a onClick={() => Utils.addCard(p.id,this.props.getCardListRequest)}>
                           <i className="icon_bag_alt"/></a>
                       </li>}
                       <li className="quick-view"><Link to={`/product/${p.id}`}>Просмотр</Link></li>

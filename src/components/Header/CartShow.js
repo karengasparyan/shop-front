@@ -131,6 +131,8 @@ class CartShow extends Component {
                     value={singleCount.map((c) => c[p.id]).filter(u => u !== undefined)[0]}
                     onClick={() => this.setCountProduct(p.id)}
                     onChange={this.handleChange}
+                    min={0}
+                    max={p.qty}
                   />
                 </div>
                 <h6>{Utils.sliceText(p.name,17)}</h6>

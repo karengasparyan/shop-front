@@ -26,31 +26,31 @@ class Api {
 
   static getProducts(query) {
     return api.get('/products', {
-      params: { query },
+      params: query ,
     });
   }
 
   static getSaleProducts(query) {
     return api.get('/products', {
-      params: { query },
+      params: query ,
     });
   }
 
   static getNewProducts(query) {
     return api.get('/products', {
-      params: { query },
+      params: query ,
     });
   }
 
   static getEquipmentProducts(query) {
     return api.get('/products', {
-      params: { query },
+      params: query ,
     });
   }
 
   static getWeekSaleProducts(query) {
     return api.get('/products', {
-      params: { query },
+      params: query ,
     });
   }
 

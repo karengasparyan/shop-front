@@ -1,6 +1,6 @@
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux';
-import {Link, withRouter} from "react-router-dom";
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 import Slider from "./SliderPrice";
 import {
   getFilterListRequest,
@@ -10,9 +10,8 @@ import {
 import _ from "lodash";
 import memoizeOne from "memoize-one";
 import queryString from 'query-string';
-import {object} from "prop-types";
 import Utils from "../../helpers/Utils";
-import {withMobileDialog} from "@material-ui/core";
+import {initPage, setPage} from "../../store/actions/reduxSetState";
 
 class Sidebar extends Component {
   static propTypes = {}
@@ -27,10 +26,11 @@ class Sidebar extends Component {
   }
 
   componentDidMount() {
-    let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
+    let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
+    setPage(1);
     if (query) {
-      this.setState({search: query.s})
-      this.props.getProductsRequest(query);
+      this.setState({ search: query.s })
+      this.props.getProductsRequest({...query, page: 1});
     }
     this.props.getSidebarTitlesRequest();
   }
@@ -44,18 +44,18 @@ class Sidebar extends Component {
   }, _.isEqual)
 
   initProductsRequest = memoizeOne((params) => {
-    window.scrollTo(0, 150)
-    let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
-    if (_.isEmpty(params)) {
-      this.props.getProductsRequest(query);
+    if (params){
+      window.scrollTo(0, 150)
+      let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
+      this.props.getProductsRequest({ ...query, page: 1 });
     }
   }, _.isEqual)
 
   changeFilter = (key, value) => {
 
-    let {history} = this.props;
+    let { history, setPage } = this.props;
 
-    let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
+    let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
 
     if (!query[key]) {
       query[key] = [];
@@ -73,69 +73,65 @@ class Sidebar extends Component {
       delete query.price;
     }
 
-    const str = queryString.stringify(query, {arrayFormat: 'comma'});
+    const str = queryString.stringify(query, { arrayFormat: 'comma' });
 
     history.replace('?' + str)
 
-    this.props.getProductsRequest(query)
-
+    setPage(1);
   }
 
   handleChange = (value) => {
-    let {history} = this.props
-
+    let { history, setPage } = this.props
+    const [min, max] = value;
     let query = queryString.parse(window.location.search,);
     if (query) {
-      query.price = value;
-      history.replace('?' + queryString.stringify(query,))
-      this.props.getProductsRequest(query)
-      this.setState({value})
+      query.min = min;
+      query.max = max;
+      history.replace('?' + queryString.stringify(query));
+      setPage(1);
     }
   }
 
   inputChange = (ev, index) => {
-    let {value} = this.state;
-    let {history} = this.props;
-    for (let i = 0; i < value.length; i++) {
-      if (+ev.target.value !== -1) {
-        value[index] = +ev.target.value;
-      }
-    }
+
+    let { history, setPage } = this.props;
     let query = queryString.parse(window.location.search);
-    if (query) {
-      query.price = value;
-      history.replace('?' + queryString.stringify(query))
+
+    if (index === 0) {
+      query.min = +ev.target.value;
+    } else {
+      query.max = +ev.target.value;
     }
-
-    this.props.getProductsRequest(query)
-
-    this.setState({value})
+    history.replace('?' + queryString.stringify(query));
+    setPage(1);
   }
 
   render() {
-    const {attributeFilter, sidebarTitles, products} = this.props;
-    const {value} = this.state;
+    const { attributeFilter, sidebarTitles, price, productCount } = this.props;
+
+    console.log(productCount)
+
+
     let filter = [];
     if (!_.isEmpty(sidebarTitles)) {
       this.initTitles(sidebarTitles)
       filter = _.uniqBy(attributeFilter, 'attributeKey')
     }
 
-    let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
+    let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
 
-    const {s, price, ...a} = query;
+    const { min = price[0], max = price[1] } = query;
 
-    this.initProductsRequest(a)
-
-    console.log(filter)
-    console.log(sidebarTitles)
-
+    this.initProductsRequest(query)
     return (
-      <div style={{width: '100%'}} className="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+      <div style={{ width: '100%' }} className="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
         <div className="filter-widget">
           <h4 className="fw-title">Цена</h4>
           <div className="filter-range-wrap">
-            <Slider value={value} inputChange={(ev, i) => this.inputChange(ev, i)} onChange={this.handleChange}/>
+            <Slider
+              value={[min, max]}
+              inputChange={(ev, i) => this.inputChange(ev, i)}
+              onChange={this.handleChange} />
           </div>
           {/*<Link className="filter-btn">Фильтр</Link>*/}
         </div>
@@ -154,7 +150,7 @@ class Sidebar extends Component {
                         id={`c_${c.id}`}
                         checked={_.isArray(query[c.attributeKey]) ? query[c.attributeKey]?.includes(c.attributeValue) : query[c.attributeKey] === c.attributeValue}
                       />
-                      <span className="checkmark"/>
+                      <span className="checkmark" />
                     </label>
                   </div>
                 </div>
@@ -225,11 +221,14 @@ const mapStateToProps = (state) => ({
   attributeFilter: state.products.attributeFilter,
   sidebarTitles: state.products.sidebarTitles,
   products: state.products.products,
+  price: state.products.price,
+  productCount: state.products.productCount,
 });
 const mapDispatchToProps = {
   getFilterListRequest,
   getSidebarTitlesRequest,
   getProductsRequest,
+  setPage,
 };
 
 const Container = connect(

@@ -68,17 +68,10 @@ class ReactProSlider extends Component {
           </div>
           <nav className="nav-menu mobile-menu">
             <ul>
-              <li className={1 === active ? 'active' : ''}
-                  onClick={() => this.changeActive(1)}><NavLink to="/">ГЛАВНАЯ</NavLink></li>
-              <li className={2 === active ? 'active' : ''}
-                  onClick={() => this.changeActive(2)}><NavLink to="/shop">НОВОСТИ И АКЦИИ</NavLink></li>
-              <li className={3 === active ? 'active' : ''}
-                  onClick={() => this.changeActive(3)}>
-                <NavLink to="/shipping-payment">ДОСТАВКА И ОПЛАТА</NavLink>
-              </li>
-              <li className={4 === active ? 'active' : ''}
-                  onClick={() => this.changeActive(4)}><NavLink to="/guarantee">ГАРАНТИЯ</NavLink></li>
-
+              <li><NavLink exact to="/">ГЛАВНАЯ</NavLink></li>
+              <li><NavLink to="/shop">НОВОСТИ И АКЦИИ</NavLink></li>
+              <li><NavLink to="/shipping-payment">ДОСТАВКА И ОПЛАТА</NavLink></li>
+              <li><NavLink to="/guarantee">ГАРАНТИЯ</NavLink></li>
               <li onMouseOver={() => showMenu('inTheShop')}>
                 <NavLink to="/contacts">О МАГАЗИНЕ</NavLink>
                 {/*<div onMouseLeave={() =>  showMenu(null)}>*/}

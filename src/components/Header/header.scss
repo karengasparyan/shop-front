@@ -39,15 +39,16 @@
     li {
       cursor: pointer;
       transition: 0.5s;
-
-      &:hover {
-        transition: 0.5s;
-        transform: scale(1.01);
-        color: var(--brandColor);
+      a {
+        color: #000000;
+        &:hover {
+          transition: 0.5s;
+          transform: scale(1.01);
+          color: var(--brandColor);
+        }
       }
       span {
         margin-right: 7px;
-
 
       }
     }
