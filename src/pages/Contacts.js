@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import BrandCrumb from "../components/BrandCrumb";
 import Wrapper from "../components/Wrapper";
+import {AnimateKeyframes} from "react-simple-animate";
 
 class Contacts extends Component {
   static propTypes = {}
@@ -16,6 +17,11 @@ class Contacts extends Component {
     return (
       <Wrapper>
         <BrandCrumb crumb="О магазине"/>
+        <AnimateKeyframes
+          play={true}
+          duration={0.5}
+          keyframes={["opacity: 0", "opacity: 1"]}
+        >
         <div className="map spad">
           <div className="container">
               <iframe
@@ -96,6 +102,7 @@ class Contacts extends Component {
             </div>
           </div>
         </section>
+          </AnimateKeyframes>
       </Wrapper>
     );
   }

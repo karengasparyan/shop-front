@@ -9,6 +9,7 @@ import {getCardListRequest} from "../../store/actions/products";
 import {setTotalPrice} from "../../store/actions/reduxSetState";
 import {Link} from "react-router-dom";
 import memoizeOne from "memoize-one";
+import {AnimateKeyframes} from "react-simple-animate";
 
 
 class ShoppingCart extends Component {
@@ -107,6 +108,11 @@ class ShoppingCart extends Component {
         <section className="shopping-cart spad">
           <div className="container">
             <div className="row">
+              <AnimateKeyframes
+                play={true}
+                duration={0.5}
+                keyframes={["opacity: 0", "opacity: 1"]}
+              >
               <div className="col-lg-12">
                 <div className="cart-table">
                   {_.isEmpty(cardProducts) ? <p>Корзина пуста</p> : <table>
@@ -166,6 +172,7 @@ class ShoppingCart extends Component {
                   </div>
                 </div>}
               </div>
+               </AnimateKeyframes>
             </div>
           </div>
         </section>

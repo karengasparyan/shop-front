@@ -4,10 +4,9 @@ import {Link, withRouter} from "react-router-dom";
 import {getCardListRequest, getProductsRequest, singleProductsRequest} from "../../store/actions/products";
 import Preloader from "../../svg/preloader.svg";
 import _ from "lodash";
-import {AnimateGroup} from "react-animation";
 import memoizeOne from "memoize-one";
-import {toast} from "react-toastify";
 import Utils from "../../helpers/Utils";
+import {AnimateKeyframes} from "react-simple-animate";
 
 class RelatedProducts extends Component {
   static propTypes = {}
@@ -79,7 +78,11 @@ class RelatedProducts extends Component {
                   onMouseLeave={() => this.showBuyMenu(null)}
                   className="pi-pic">
                   <img src={`${direction}/productImage/${p.id}/${p?.images[0]?.path}`} alt={`image_${p.id}`}/>
-                  <AnimateGroup animation="bounce">
+                  <AnimateKeyframes
+                    play={+showBuyMenu === +p.id}
+                    duration={1}
+                    keyframes={["opacity: 0", "opacity: 1"]}
+                  >
                     {+showBuyMenu === +p.id && <ul>
                       {p.qty > 0 && <li className="w-icon active">
                         <a onClick={() => Utils.addCard(p.id,this.props.getCardListRequest)}>
@@ -88,7 +91,7 @@ class RelatedProducts extends Component {
                       <li className="quick-view"><Link to={`/product/${p.id}`}>Просмотр</Link></li>
                       {/*<li className="w-icon"><Link to=""><i className="fa fa-random"/></Link></li>*/}
                     </ul>}
-                  </AnimateGroup>
+                  </AnimateKeyframes>
                   {p?.attributes?.find(status => status.attributeKey === 'положение') &&
                   p?.attributes?.find(status => status.attributeValue === 'акция') &&
                   <div className="sale pp-sale">акция</div>}
@@ -107,7 +110,7 @@ class RelatedProducts extends Component {
                   {p.attributes.filter(a => a.attributeKey !== 'status' && a.attributeKey !== 'seo').map(a =>
                     <div className="catagory-name">{a.attributeValue}</div>)}
                   <a href="#">
-                    <h5>{p.name}</h5>
+                    <h5>{Utils.sliceText(p.name, 30)}</h5>
                   </a>
                   <div className="product-price">
                     {p.price}

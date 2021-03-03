@@ -1,14 +1,12 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component,} from 'react';
 import {connect} from 'react-redux';
-import {singleProductsRequest} from "../store/actions/products";
-
 import {withRouter} from "react-router-dom";
-
 import Product from "../components/Shop/Product";
 import Sidebar from "../components/Shop/Sidebar";
 import Wrapper from "../components/Wrapper";
 import BrandCrumb from "../components/BrandCrumb";
 import RelatedProducts from "../components/Shop/RelatedProducts";
+import {AnimateKeyframes} from "react-simple-animate";
 
 class SingleProduct extends Component {
   static propTypes = {}
@@ -40,10 +38,8 @@ class SingleProduct extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  singleProduct: state.products.singleProduct
 });
 const mapDispatchToProps = {
-  singleProductsRequest,
 };
 
 const Container = connect(

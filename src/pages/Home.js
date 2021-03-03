@@ -8,6 +8,7 @@ import SaleBanner from "../components/Main/SaleBanner";
 import CountDownSection from "../components/Main/CountDownSection";
 import {getCatalogListRequest, getImagesSliderRequest} from "../store/actions/products";
 import Preloader from "../svg/preloader.svg";
+import {AnimateKeyframes} from "react-simple-animate";
 
 class Home extends Component {
 
@@ -27,11 +28,17 @@ class Home extends Component {
 
     return (
         <Wrapper>
+          <AnimateKeyframes
+            play={true}
+            duration={0.5}
+            keyframes={["opacity: 0", "opacity: 1"]}
+          >
           {sliderImages && <SlickCarousel images={sliderImages} slidesToShow={1} arrows={true}/>}
           <BannerSection />
           <SaleBanner />
           <CountDownSection />
-          <SaleBanner reverse="flex-row-reverse" titleMargin={{marginLeft: 56}} title="СЕЙЧАС ПОКУПАЮТ" />
+          <SaleBanner reverse="flex-row-reverse" title="СЕЙЧАС ПОКУПАЮТ" />
+          </AnimateKeyframes>
         </Wrapper>
     );
   }

@@ -8,6 +8,7 @@ import _ from 'lodash';
 import Preloader from "../../svg/preloader2.svg";
 import Utils from "../../helpers/Utils";
 import memoizeOne from "memoize-one";
+import {AnimateKeyframes} from "react-simple-animate";
 
 class CartShow extends Component {
   static propTypes = {
@@ -115,6 +116,11 @@ class CartShow extends Component {
 
     return (
       <div onMouseLeave={() => showMenu(null)} className="cart-hover">
+        <AnimateKeyframes
+          play={this.props.show === 'showCard'}
+          duration={0.5}
+          keyframes={["opacity: 0", "opacity: 1"]}
+        >
         <div className="select-items">
           <table>
             {_.isEmpty(cardProducts) ? <p>Корзина пуста</p> : <tbody>
@@ -152,6 +158,7 @@ class CartShow extends Component {
           <Link to="/shopping-cart" className="primary-btn view-card">ПОСМОТРЕТЬ</Link>
           <Link to="/check-out" className="primary-btn checkout-btn">ЗАКАЗАТЬ</Link>
         </div>}
+         </AnimateKeyframes>
       </div>
     );
   }

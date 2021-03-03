@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Error404 from './pages/Error404';
 import Home from './pages/Home';
 import Contacts from "./pages/Contacts";
@@ -21,6 +21,10 @@ class App extends Component {
       default: "toastDefault",
       dark: "toastDark toastDarkBlue",
     };
+   console.log("%cЗдравствуйте!", "color:red;font-weight:bold;font-size:45px;")
+   console.log("%cЕсли у вас ест какие то вапроси разработчику можете написат!👌👇","color:#565656;font-weight:500;font-size:20px;")
+   console.log("%chttps://www.linkedin.com/in/karen-gasparyan-1b897a203","color:#565656;font-weight:500;font-size:20px;")
+
     return (
       <>
         <BrowserRouter>

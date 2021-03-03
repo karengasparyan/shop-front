@@ -24,7 +24,7 @@ class Countdown extends Component {
    this.timeout = setTimeout(() => {
       this.getTimeUntil(deadline);
       this.getTimeUntilInterval(deadline)
-    }, 200)
+    }, 0)
   }
 
   componentWillUnmount() {
@@ -61,7 +61,7 @@ class Countdown extends Component {
       <>
         {weekSale.map(p => <div key={p.id} className="col-lg-6 text-center">
           <div className="section-title">
-            <h2>Продажа недели</h2>
+            <h3>Продажа недели</h3>
             <p>{p.shortDescription}</p>
             <div className="product-price">
               ₽ {p.salePrice}

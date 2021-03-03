@@ -14,6 +14,7 @@ import Utils from "../../helpers/Utils";
 import {toast} from "react-toastify";
 import ImageGallery from 'react-image-gallery';
 import {setTotalPrice} from "../../store/actions/reduxSetState";
+import {AnimateKeyframes} from "react-simple-animate";
 
 class Product extends Component {
   static propTypes = {}
@@ -110,7 +111,6 @@ class Product extends Component {
 
   openModal = () => {
     const {openModal} = this.state;
-    console.log('aaaaaaaaaaaaaaaa')
     this.setState({openModal: !openModal,})
   }
 
@@ -155,6 +155,11 @@ class Product extends Component {
           <ImageGallery items={images}  />
           </div>
           <div className="col-lg-6">
+            <AnimateKeyframes
+              play={!_.isEmpty(this.props.singleProduct)}
+              duration={1}
+              keyframes={["opacity: 0", "opacity: 1"]}
+            >
             <div className="product-details">
               <div className="pd-title">
                 <span>{singleProduct?.attributes?.find(a => a.attributeKey.toLowerCase() === 'цвет')?.attributeValue}</span>
@@ -190,6 +195,7 @@ class Product extends Component {
               {singleProduct.qty !== 0 ? <div className="p-code">{`В складе ${singleProduct.qty} штук`}</div> :
                 <div className="p-code">Нет в наличии</div>}
             </div>
+            </AnimateKeyframes>
           </div>
         </div>
         <div className="product-tab">
@@ -232,7 +238,11 @@ class Product extends Component {
                               className="pi-pic">
                               <img src={`${direction}/productImage/${p.id}/${p?.images[0]?.path}`}
                                    alt={`image_${p.id}`}/>
-                              <AnimateGroup animation="bounce">
+                              <AnimateKeyframes
+                                play={+showBuyMenu === +p.id}
+                                duration={0.5}
+                                keyframes={["opacity: 0", "opacity: 1"]}
+                              >
                                 {+showBuyMenu === +p.id && <ul>
                                   {p.qty > 0 && <li className="w-icon active">
                                     <a onClick={() => Utils.addCard(p.id,this.props.getCardListRequest)}>
@@ -241,7 +251,7 @@ class Product extends Component {
                                   <li className="quick-view"><Link to={`/product/${p.id}`}>Просмотр</Link></li>
                                   {/*<li className="w-icon"><Link to=""><i className="fa fa-random"/></Link></li>*/}
                                 </ul>}
-                              </AnimateGroup>
+                               </AnimateKeyframes>
                               {p?.attributes?.find(status => status.attributeKey === 'положение') &&
                               p?.attributes?.find(status => status.attributeValue === 'акция') &&
                               <div className="sale pp-sale">акция</div>}
@@ -261,7 +271,7 @@ class Product extends Component {
                                 a.attributeKey !== 'секция комплектация').map(a =>
                                 <div className="catagory-name">{a.attributeValue}</div>)}
                               <a href="#">
-                                <h5>{p.name}</h5>
+                                <h5>{Utils.sliceText(p.name, 30)}</h5>
                               </a>
                               <div className="product-price">
                                 {p.price}

@@ -103,7 +103,7 @@ class SlickCarousel extends Component {
                 <img style={{width: '100%', height: '100%'}}
                      src={`${direction}/productImage/${i.id}/${i.images[0].path}`}
                      alt={`image_${i.id}`}/>
-                <AnimateGroup animation="bounce">
+                <AnimateGroup animation="fade">
                   {+showBuyMenu === +i.id && <ul>
                     {i.qty > 0 && <li className="w-icon active">
                       <a onClick={() => Utils.addCard(i.id,this.props.getCardListRequest)}>

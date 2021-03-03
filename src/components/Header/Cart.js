@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import 'react-pro-sidebar/dist/css/styles.css';
-import {CSSTransition} from 'react-transition-group';
-import PropTypes from "prop-types";
 import CartHover from "./CartShow";
-import {Link, NavLink, withRouter} from "react-router-dom";
-import {AnimateGroup} from "react-animation";
+import {Link, withRouter} from "react-router-dom";
 import _ from "lodash";
-import {getCardListRequest, getProductsRequest} from "../../store/actions/products";
-import queryString from "query-string";
+import {getCardListRequest} from "../../store/actions/products";
 import Utils from "../../helpers/Utils";
 import memoizeOne from "memoize-one";
 import {setTotalPrice} from "../../store/actions/reduxSetState";
@@ -43,10 +39,8 @@ class Cart extends Component {
             <i className="icon_bag_alt"/>
             {cardProducts?.length > 0 && <span>{cardProducts?.length}</span>}
           </Link>
-          <AnimateGroup animation="fade">
             {show === 'showCard' && path !== '/shopping-cart' && path !== '/check-out' &&
             <CartHover show={show} showMenu={showMenu}/>}
-          </AnimateGroup>
         </li>
         <li className="cart-price">{`₽ ${totalPrice}`}</li>
       </ul>

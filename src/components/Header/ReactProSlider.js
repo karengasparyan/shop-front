@@ -43,8 +43,8 @@ class ReactProSlider extends Component {
                 </NavLink>
               </MenuItem>)}
             </SubMenu>
-            <MenuItem><NavLink to="/">ДОСТАВКА И ОПЛАТА</NavLink></MenuItem>
-            <MenuItem><NavLink to="/">ГАРАНТИЯ</NavLink></MenuItem>
+            <MenuItem><NavLink to="/shipping-payment">ДОСТАВКА И ОПЛАТА</NavLink></MenuItem>
+            <MenuItem><NavLink to="/guarantee">ГАРАНТИЯ</NavLink></MenuItem>
             <MenuItem><NavLink to="/contacts">О МАГАЗИНЕ</NavLink></MenuItem>
           </Menu>
         </ProSidebar>

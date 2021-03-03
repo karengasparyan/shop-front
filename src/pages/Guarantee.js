@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import Wrapper from "../components/Wrapper";
 import BrandCrumb from "../components/BrandCrumb";
+import {AnimateKeyframes} from "react-simple-animate";
 
 class Guarantee extends Component {
 
@@ -12,6 +13,11 @@ class Guarantee extends Component {
       <Wrapper>
         <BrandCrumb crumb="Гарантия"/>
         <div className="container">
+          <AnimateKeyframes
+            play={true}
+            duration={0.5}
+            keyframes={["opacity: 0", "opacity: 1"]}
+          >
           <h2 className="shippingAndPaymentTitle">Гарантия</h2>
           <p>Официальная гарантия изготовителей составляет 6 месяцев. В течение гарантийного срока производится
             бесплатное устранение недостатков товара, возникших по вине изготовителя.
@@ -27,7 +33,7 @@ class Guarantee extends Component {
             <li><p>Естественного износа деталей,</p></li>
             <li><p>Повреждений, вызванных несоблюдением инструкции по эксплуатации.</p></li>
           </ul>
-
+            </AnimateKeyframes>
         </div>
       </Wrapper>
     );

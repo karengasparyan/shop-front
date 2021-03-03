@@ -100,6 +100,7 @@ class Search extends Component {
       return <img src={Preloader} width="40px" height="40px"/>;
     }
 
+
     const direction = process.env.REACT_APP_API_URL;
 
     return (

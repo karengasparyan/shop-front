@@ -16,22 +16,34 @@ class Footer extends Component {
     return (
       <footer className="footer-section">
         <div className="container-fluid guaranteeContainerColor">
-          <div className="guaranteeContainer container">
+          <div className="guaranteeContainer">
             <div className="guarantee">
               <img src="https://static.tildacdn.com/tild3134-6438-4966-a439-323334663039/parcel_1.svg"/>
-              <p>Доставка в любой регион России</p>
+              <p>
+                Доставка в любой
+                регион России
+              </p>
             </div>
-            <div className="guarantee">
-              <img src="https://static.tildacdn.com/tild6335-3933-4534-b866-333232393965/transport_1.svg"/>
-              <p>Безопасная оплата банковской картой</p>
-            </div>
+            {/*<div className="guarantee">*/}
+            {/*  <img src="https://static.tildacdn.com/tild6335-3933-4534-b866-333232393965/transport_1.svg"/>*/}
+            {/*  <p>*/}
+            {/*    Безопасная оплата*/}
+            {/*    банковской картой*/}
+            {/*  </p>*/}
+            {/*</div>*/}
             <div className="guarantee">
               <img src="https://static.tildacdn.com/tild3937-6630-4030-b164-356165666639/shipping-and-deliver.svg"/>
-              <p>Возврат в течении 14 дней</p>
+              <p>
+                Возврат в течении
+                14 дней
+              </p>
             </div>
             <div className="guarantee">
               <img src="https://static.tildacdn.com/tild3666-3730-4338-b666-643339626135/user_1.svg"/>
-              <p>Гарантия на коляску 365 дней</p>
+              <p>
+                Гарантия на коляску
+                365 дней
+              </p>
             </div>
           </div>
         </div>

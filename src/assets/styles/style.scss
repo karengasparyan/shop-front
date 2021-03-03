@@ -932,22 +932,23 @@ ol {
 -----------------------*/
 
 .banner-section {
-  padding: 20px 30px 0 30px;
+  padding: 20px 30px 20px 30px;
+  background-color: #f2eee4;
 }
 
 .single-banner {
   position: relative;
   z-index: 1;
-  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.50);
-  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.50);
-  box-shadow: 0 2px 0 rgba(255, 255, 255, 1);
   cursor: pointer;
   transition: 0.5s;
+  box-shadow: 0 0 0.2em #b6b6b6;
 }
 
 .single-banner:hover {
   border: none;
   transform: scale(1.03);
+  box-shadow: 0 0 0.7em #1d1d1d;
+  transition: 0.5s;
 }
 
 .single-banner::before {
@@ -968,8 +969,8 @@ ol {
 }
 
 .single-banner img {
-  width: 470px;
-  min-width: 470px;
+  width: 350px;
+  min-width: 100%;
 }
 
 .single-banner .inner-text {
@@ -1019,11 +1020,10 @@ padding: 0 40px;
 }
 
 .product-large {
-  height: 620px;
   margin-left: -15px;
   margin-right: -15px;
   text-align: center;
-  padding-top: 85px;
+  padding-top: 35px;
 }
 
 .product-large p {
@@ -1045,17 +1045,23 @@ padding: 0 40px;
   font-size: 18px;
   font-weight: 500;
   display: inline-block;
-  position: relative;
-}
-
-.product-large a:before {
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background: var(--brandColor);
-  content: "";
+  border: 2px solid var(--brandColor);
+  padding: 5px;
+  margin: 10px 0 0 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 1px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 15px;
+  transition: 0.5s;
+  &:hover{
+    transition: 0.5s;
+    background-color: #ffffff;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 1px;
+    box-shadow: 0 0 0.7em #ff5252;
+  }
 }
 
 .filter-control {
@@ -1284,10 +1290,7 @@ padding: 0 40px;
 -----------------------*/
 
 .deal-of-week {
-  padding-top: 80px;
-  padding-bottom: 80px;
-  margin-left: 65px;
-  margin-right: 65px;
+  padding-top: 18px;
 }
 
 .countdown-timer {
@@ -1310,12 +1313,12 @@ padding: 0 40px;
 .countdown-timer .cd-item span {
   color: var(--brandColor);
   font-weight: 700;
-  line-height: 20px;
-  font-size: 32px;
+  //line-height: 20px;
+  font-size: 3vw;
 }
 
 .countdown-timer .cd-item p {
-  font-size: 12px;
+  font-size: 1vw;
   color: #b2b2b2;
   margin-bottom: 0;
   text-transform: uppercase;
@@ -1709,11 +1712,6 @@ padding: 0 40px;
   Product Shop
 -----------------------*/
 
-.product-shop {
-  padding-top: 80px;
-  padding-bottom: 80px;
-}
-
 .filter-widget {
   margin-bottom: 45px;
 }
@@ -1788,16 +1786,6 @@ padding: 0 40px;
 
 .filter-widget .filter-range-wrap .range-slider .price-input {
   position: relative;
-}
-
-.filter-widget .filter-range-wrap .range-slider .price-input:after {
-  position: absolute;
-  left: 58px;
-  top: 13px;
-  height: 1px;
-  width: 17px;
-  background: #ebebeb;
-  content: "";
 }
 
 .filter-widget .filter-range-wrap .range-slider .price-input input {
@@ -2023,7 +2011,8 @@ padding: 0 40px;
 
 .loading-more {
   text-align: center;
-  padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .loading-more i {
@@ -3910,7 +3899,7 @@ padding: 0 40px;
 
 /* Medium Device: 1200px */
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (max-width: 1199px) {
   .inner-header .advanced-search .category-btn {
     max-width: 36%;
   }
@@ -3954,6 +3943,11 @@ padding: 0 40px;
     margin-bottom: 30px;
   }
   .product-large {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
     margin-left: 0;
     margin-right: 0;
   }
@@ -3999,7 +3993,7 @@ padding: 0 40px;
 
 /* Tablet Device: 768px */
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (max-width: 991px) {
   .header-top .ht-right .login-panel {
     padding-left: 10px;
   }
@@ -4045,10 +4039,6 @@ padding: 0 40px;
   }
   .blog-details-inner .blog-post .next-blog {
     padding-right: 30px;
-  }
-  .blog-sidebar,
-  .produts-sidebar-filter {
-    padding-top: 50px;
   }
   .checkout-content input {
     margin-top: 50px;
@@ -4207,10 +4197,7 @@ padding: 0 40px;
   .blog-details-inner .posted-by .pb-text {
     padding-left: 0;
   }
-  .blog-sidebar,
-  .produts-sidebar-filter {
-    padding-top: 50px;
-  }
+
   .checkout-content input {
     margin-top: 50px;
   }

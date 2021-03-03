@@ -72,6 +72,18 @@
 
 .countDownSection {
   background-color: #f3f0e5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  img {
+    width: 55vh;
+    max-width: 75%;
+    min-width: 70%;
+    transition: 0.5s;
+    &:hover{
+    box-shadow: 0 0 0.7em #c4beb9;
+      transition: 0.5s;
+    }
+  }
 }
 
 .guaranteeContainerColor{
@@ -85,11 +97,13 @@
     justify-content: space-around;
     .guarantee {
       display: flex;
-      width: 25%;
       justify-content: center;
       align-items: center;
       vertical-align: middle;
       padding: 15px;
+      margin: 5px;
+      width: 24%;
+      min-width: 24%;
       img{
         margin: 10px;
       }
@@ -100,7 +114,9 @@
   }
 }
 .compTitle {
-  width: max-content;
+  width: 100%;
+  min-width: max-content;
+  max-width: max-content;
   margin: 0 0 12px 0;
   font-weight: bold;
   color: #4b4b4b;
@@ -137,14 +153,27 @@
 }
 
 .primary-btn-custom {
+  color: var(--brandColor);
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
   display: inline-block;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 12px 30px;
-  color: #ffffff;
-  background: var(--brandColor);
-  text-transform: uppercase;
+  border: 2px solid var(--brandColor);
+  padding: 10px 15px;
+  margin: 10px 0 0 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 1px;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 15px;
+  transition: 0.5s;
+  &:hover{
+    transition: 0.5s;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 1px;
+    box-shadow: 0 0 0.7em #ff5252;
+  }
 }
 
 .shippingAndPaymentTitle{

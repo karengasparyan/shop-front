@@ -11,6 +11,7 @@ import Utils from "../../helpers/Utils";
 import memoizeOne from "memoize-one";
 import {setTotalPrice} from "../../store/actions/reduxSetState";
 import classnames from "classnames";
+import {AnimateKeyframes} from "react-simple-animate";
 
 
 class CheckOut extends Component {
@@ -96,7 +97,7 @@ class CheckOut extends Component {
   render() {
     const {cardProducts, orderRequestStatus} = this.props;
     let {values, errors} = this.state;
-    const { messages } = this.validator;
+    const {messages} = this.validator;
 
     if (!cardProducts) {
       return <div className="preloaderContainer"><img src={Preloader} alt="preloader"/></div>
@@ -118,90 +119,102 @@ class CheckOut extends Component {
                 <div className="col-lg-6">
                   <h4>Реквизиты для оплаты и доставки</h4>
                   <div className="row">
-                    <div className="col-lg-12">
-                      <label htmlFor="name">Имя Фамилия<span>*</span></label>
-                      <input
-                        type="text"
-                        id="firstname"
-                        value={values.name}
-                        onChange={(ev) => this.handleChange(ev, 'name')}
-                      />
-                      {this.validator.message('name', values.name, 'required|string|min:3')}
-                      <span className="inputValidationError">{errors?.name}</span>
-                    </div>
-                    <div className="col-lg-12">
-                      <label htmlFor="town">Город<span>*</span></label>
-                      <input
-                        type="text"
-                        id="town"
-                        value={values.town}
-                        onChange={(ev) => this.handleChange(ev, 'town')}
-                      />
-                      {this.validator.message('town', values.town, 'required|string|min:3')}
-                      <span className="inputValidationError">{errors?.town}</span>
-                    </div>
-                    <div className="col-lg-12">
-                      <label htmlFor="address">Адрес доставки<span>*</span></label>
-                      <input
-                        type="text"
-                        id="address"
-                        value={values.address}
-                        onChange={(ev) => this.handleChange(ev, 'address')}
-                      />
-                      {this.validator.message('address', values.address, 'required|string|min:15')}
-                      <span className="inputValidationError">{errors?.address}</span>
-                    </div>
-                    <div className="col-lg-6">
-                      <label htmlFor="phone">Телефон<span>*</span></label>
-                      <input
-                        type="text"
-                        id="phone"
-                        value={values.phone}
-                        onChange={(ev) => this.handleChange(ev, 'phone')}
-                      />
-                      {this.validator.message('phone', values.phone, 'required|phone')}
-                      <span className="inputValidationError">{errors?.phone}</span>
-                    </div>
-                    <div className="col-lg-6">
-                      <label htmlFor="email">Адрес электронной почты<span>*</span></label>
-                      <input
-                        type="text"
-                        id="email"
-                        value={values.email}
-                        onChange={(ev) => this.handleChange(ev, 'email')}
-                      />
-                      {this.validator.message('email', values.email, 'required|email')}
-                      <span className="inputValidationError">{errors?.email}</span>
-                    </div>
+                    <AnimateKeyframes
+                      play={true}
+                      duration={0.5}
+                      keyframes={["opacity: 0", "opacity: 1"]}
+                    >
+                      <div className="col-lg-12">
+                        <label htmlFor="name">Имя Фамилия<span>*</span></label>
+                        <input
+                          type="text"
+                          id="firstname"
+                          value={values.name}
+                          onChange={(ev) => this.handleChange(ev, 'name')}
+                        />
+                        {this.validator.message('name', values.name, 'required|string|min:3')}
+                        <span className="inputValidationError">{errors?.name}</span>
+                      </div>
+                      <div className="col-lg-12">
+                        <label htmlFor="town">Город<span>*</span></label>
+                        <input
+                          type="text"
+                          id="town"
+                          value={values.town}
+                          onChange={(ev) => this.handleChange(ev, 'town')}
+                        />
+                        {this.validator.message('town', values.town, 'required|string|min:3')}
+                        <span className="inputValidationError">{errors?.town}</span>
+                      </div>
+                      <div className="col-lg-12">
+                        <label htmlFor="address">Адрес доставки<span>*</span></label>
+                        <input
+                          type="text"
+                          id="address"
+                          value={values.address}
+                          onChange={(ev) => this.handleChange(ev, 'address')}
+                        />
+                        {this.validator.message('address', values.address, 'required|string|min:15')}
+                        <span className="inputValidationError">{errors?.address}</span>
+                      </div>
+                      <div className="col-lg-12">
+                        <label htmlFor="phone">Телефон<span>*</span></label>
+                        <input
+                          type="text"
+                          id="phone"
+                          value={values.phone}
+                          onChange={(ev) => this.handleChange(ev, 'phone')}
+                        />
+                        {this.validator.message('phone', values.phone, 'required|phone')}
+                        <span className="inputValidationError">{errors?.phone}</span>
+                      </div>
+                      <div className="col-lg-12">
+                        <label htmlFor="email">Адрес электронной почты<span>*</span></label>
+                        <input
+                          type="text"
+                          id="email"
+                          value={values.email}
+                          onChange={(ev) => this.handleChange(ev, 'email')}
+                        />
+                        {this.validator.message('email', values.email, 'required|email')}
+                        <span className="inputValidationError">{errors?.email}</span>
+                      </div>
+                    </AnimateKeyframes>
                   </div>
                 </div>
                 <div className="col-lg-6">
-                  <div className="place-order">
-                    <h4>Ваши заказы</h4>
-                    <div className="order-total">
-                      <ul className="order-table">
-                        <li>Товары <span>ИТОГОВАЯ СУММА</span></li>
-                        {cardProducts.map((p) => <li key={p.id}
-                                                     className="fw-normal">
-                          {`${Utils.sliceText(p.name,40)} X ${singleCount.map((c) => c[p.id]).filter(u => u !== undefined)[0]}`}
-                          <span>
+                  <AnimateKeyframes
+                    play={true}
+                    duration={0.5}
+                    keyframes={["opacity: 0", "opacity: 1"]}
+                  >
+                    <div className="place-order">
+                      <h4>Ваши заказы</h4>
+                      <div className="order-total">
+                        <ul className="order-table">
+                          <li>Товары <span>ИТОГОВАЯ СУММА</span></li>
+                          {cardProducts.map((p) => <li key={p.id}
+                                                       className="fw-normal">
+                            {`${Utils.sliceText(p.name, 40)} X ${singleCount.map((c) => c[p.id]).filter(u => u !== undefined)[0]}`}
+                            <span>
                             {`₽ ${p.salePrice * singleCount.map((c) => c[p.id]).filter(u => u !== undefined)[0]}`}
                           </span>
-                        </li>)}
-                        <li className="total-price">ИТОГОВАЯ СУММА <span>{`₽ ${totalPrice}`}</span></li>
-                      </ul>
-                      <div className="order-btn">
-                        {orderRequestStatus === 'request' ?
-                          <div className="preloaderContainer"><img src={Preloader} alt="preloader"/></div> :
-                          <button
-                            onClick={() => this.sendOrder(totalPrice, singleCount, cardProducts)}
-                            type="button"
-                            className="site-btn place-btn">
-                            Отправить Заказ
-                          </button>}
+                          </li>)}
+                          <li className="total-price">ИТОГОВАЯ СУММА <span>{`₽ ${totalPrice}`}</span></li>
+                        </ul>
+                        <div className="order-btn">
+                          {orderRequestStatus === 'request' ?
+                            <div className="preloaderContainer"><img src={Preloader} alt="preloader"/></div> :
+                            <button
+                              onClick={() => this.sendOrder(totalPrice, singleCount, cardProducts)}
+                              type="button"
+                              className="site-btn place-btn">
+                              Отправить Заказ
+                            </button>}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </AnimateKeyframes>
                 </div>
               </div>
             </form>

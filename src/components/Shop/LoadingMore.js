@@ -36,8 +36,6 @@ class LoadingMore extends Component {
     if (page && +page >= +productCount) {
       return null
     }
-
-    console.log(productCount)
     return (
       <div className="loading-more" ref={this.scrollBottom}>
         {productsRequestStatus === 'request' && <i className="icon_loading"/>}

@@ -45,7 +45,7 @@ class Sidebar extends Component {
 
   initProductsRequest = memoizeOne((params) => {
     if (params){
-      window.scrollTo(0, 150)
+      // window.scrollTo(0, 150)
       let query = queryString.parse(window.location.search, { arrayFormat: 'comma' });
       this.props.getProductsRequest({ ...query, page: 1 });
     }
@@ -107,10 +107,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { attributeFilter, sidebarTitles, price, productCount } = this.props;
-
-    console.log(productCount)
-
+    const { attributeFilter, sidebarTitles, price } = this.props;
 
     let filter = [];
     if (!_.isEmpty(sidebarTitles)) {
@@ -125,16 +122,6 @@ class Sidebar extends Component {
     this.initProductsRequest(query)
     return (
       <div style={{ width: '100%' }} className="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
-        <div className="filter-widget">
-          <h4 className="fw-title">Цена</h4>
-          <div className="filter-range-wrap">
-            <Slider
-              value={[min, max]}
-              inputChange={(ev, i) => this.inputChange(ev, i)}
-              onChange={this.handleChange} />
-          </div>
-          {/*<Link className="filter-btn">Фильтр</Link>*/}
-        </div>
         {Utils.filterArrayOrder(sidebarTitles, filter).map(f => <div key={f.id} className="filter-widget">
           <h4 className="fw-title">{f.attributeKey || ''}</h4>
           <ul className="filter-catagories">
@@ -157,6 +144,16 @@ class Sidebar extends Component {
               </li>)}
           </ul>
         </div>)}
+        <div className="filter-widget">
+          <h4 className="fw-title">Цена</h4>
+          <div className="filter-range-wrap">
+            <Slider
+              value={[min, max]}
+              inputChange={(ev, i) => this.inputChange(ev, i)}
+              onChange={this.handleChange} />
+          </div>
+          {/*<Link className="filter-btn">Фильтр</Link>*/}
+        </div>
         {/*<div className="filter-widget">*/}
         {/*  <h4 className="fw-title">{filter[1]?.attributeKey || ''}</h4>*/}
         {/*  <div className="fw-brand-check">*/}
@@ -222,7 +219,6 @@ const mapStateToProps = (state) => ({
   sidebarTitles: state.products.sidebarTitles,
   products: state.products.products,
   price: state.products.price,
-  productCount: state.products.productCount,
 });
 const mapDispatchToProps = {
   getFilterListRequest,

@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import SlickCarousel from "../Carusel/SlickCarousel";
 import Preloader from "../../svg/preloader.svg";
-import {getNewRequest, getProductsRequest, getSaleRequest} from "../../store/actions/products";
+import {getNewRequest, getSaleRequest} from "../../store/actions/products";
+import memoizeOne from "memoize-one";
+import _ from "lodash";
 
 class SaleBanner extends Component {
 
@@ -15,11 +17,11 @@ class SaleBanner extends Component {
   }
 
   render() {
-    const {reverse, title, titleMargin, saleProducts, newProducts} = this.props;
+    const {reverse, title, saleProducts, newProducts} = this.props;
 
     let products = []
 
-    if (reverse){
+    if (reverse) {
       products = saleProducts;
     } else {
       products = newProducts;
@@ -37,7 +39,7 @@ class SaleBanner extends Component {
           <div className={`row ${reverse}`}>
             <div className="col-lg-3">
               <div className="product-large set-bg">
-                <h4 style={titleMargin} className="compTitle">{title ? title : 'ПОСЛЕДНЕЕ ПОСТУПЛЕНИЕ'}</h4>
+                <h4 className="compTitle">{title ? title : 'ПОСЛЕДНЕЕ ПОСТУПЛЕНИЕ'}</h4>
                 <img src={`${direction}/productImage/${products[0]?.id}/${products[0]?.images[0].path}`}
                      alt={`image_${products[0]?.id}`}/>
                 <Link to={reverse ? "/shop?положение=акция" : "/shop?положение=новый"}>В КАТАЛОГ</Link>

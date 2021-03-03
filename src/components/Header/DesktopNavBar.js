@@ -8,6 +8,7 @@ import {NavLink} from "react-router-dom";
 import Preloader from "../../svg/preloader.svg";
 import Utils from "../../helpers/Utils";
 import {getProductsRequest} from "../../store/actions/products";
+import {AnimateKeyframes} from "react-simple-animate";
 
 class ReactProSlider extends Component {
   static propTypes = {
@@ -50,20 +51,22 @@ class ReactProSlider extends Component {
             <div className="depart-btn">
               <i className="ti-menu"/>
               <span>КАТАЛОГ</span>
-              <AnimateGroup animation="bounce">
-                {show === 'catalog' && (
-                  <ul className="depart-hover">
-                    {catalog.map(c =>  <li key={c.id} className={+c.id === +active ? 'active' : ''}
-                  onClick={() => this.changeActive(c.id)}>
-                      <NavLink
-                        onClick={()=>this.changeAttribute(c.attributeValue)}
-                        to={`/shop?каталог=${c.attributeValue}`}>
+              <ul className="depart-hover">
+                <AnimateKeyframes
+                  play={show === 'catalog'}
+                  duration={0.5}
+                  keyframes={["opacity: 0", "opacity: 1"]}
+                >
+                  {catalog.map(c => <li key={c.id} className={+c.id === +active ? 'active' : ''}
+                                        onClick={() => this.changeActive(c.id)}>
+                    <NavLink
+                      onClick={() => this.changeAttribute(c.attributeValue)}
+                      to={`/shop?каталог=${c.attributeValue}`}>
                       {Utils.upperCase(c.attributeValue)}
-                      </NavLink>
+                    </NavLink>
                   </li>)}
-                  </ul>
-                )}
-              </AnimateGroup>
+                </AnimateKeyframes>
+              </ul>
             </div>
           </div>
           <nav className="nav-menu mobile-menu">
