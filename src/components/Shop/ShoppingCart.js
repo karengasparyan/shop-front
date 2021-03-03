@@ -131,7 +131,7 @@ class ShoppingCart extends Component {
                         <img src={`${direction}/productImage/${p.id}/${p?.images[0]?.path}`} alt={`image_${p.id}`}/>
                       </td>
                       <td className="cart-title first-row">
-                        <h5>{Utils.sliceText(p.name,40)}</h5>
+                        <Link to={`/product/${p.id}`}><h5>{Utils.sliceText(p.name, 30)}</h5></Link>
                       </td>
                       <td className="p-price first-row">{`₽ ${p.salePrice}`}</td>
                       <td className="qua-col first-row">

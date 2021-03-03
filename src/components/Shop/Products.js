@@ -104,7 +104,7 @@ class Products extends Component {
                       a.attributeKey !== 'секция комплектация').map(a =>
                       <div className="catagory-name">{a.attributeValue}</div>)}
                     <a href="#">
-                      <h5>{Utils.sliceText(p.name, 30)}</h5>
+                      <Link to={`/product/${p.id}`}><h5>{Utils.sliceText(p.name, 30)}</h5></Link>
                     </a>
                     <div className="product-price">
                       {p.price}

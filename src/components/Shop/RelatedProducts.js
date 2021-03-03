@@ -110,7 +110,7 @@ class RelatedProducts extends Component {
                   {p.attributes.filter(a => a.attributeKey !== 'status' && a.attributeKey !== 'seo').map(a =>
                     <div className="catagory-name">{a.attributeValue}</div>)}
                   <a href="#">
-                    <h5>{Utils.sliceText(p.name, 30)}</h5>
+                    <Link to={`/product/${p.id}`}><h5>{Utils.sliceText(p.name, 30)}</h5></Link>
                   </a>
                   <div className="product-price">
                     {p.price}

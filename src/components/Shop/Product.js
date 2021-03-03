@@ -270,9 +270,7 @@ class Product extends Component {
                               {p.attributes.filter(a => a.attributeKey !== 'положение' && a.attributeKey !== 'seo' &&
                                 a.attributeKey !== 'секция комплектация').map(a =>
                                 <div className="catagory-name">{a.attributeValue}</div>)}
-                              <a href="#">
-                                <h5>{Utils.sliceText(p.name, 30)}</h5>
-                              </a>
+                              <Link to={`/product/${p.id}`}><h5>{Utils.sliceText(p.name, 30)}</h5></Link>
                               <div className="product-price">
                                 {p.price}
                                 <span>{p.salePrice}</span>
