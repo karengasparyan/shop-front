@@ -66,6 +66,7 @@ class Countdown extends Component {
             <div className="product-price">
               ₽ {p.salePrice}
             </div>
+            {p.qty > 0 ? <p>{`На скаладе ${p.qty} штук`}</p> : <p>Все продоно</p>}
           </div>
 
           <div className="countdown-timer" id="countdown">

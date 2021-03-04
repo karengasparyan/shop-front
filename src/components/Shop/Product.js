@@ -152,7 +152,7 @@ class Product extends Component {
             // onMouseLeave={() => this.showSliderArrows(false)}
             className="col-lg-6">
             {/*<SlickCarousel openModal={this.openModal} images={singleProduct.images} arrows={showSliderArrows} product={true}/>*/}
-          <ImageGallery items={images}  />
+          <ImageGallery items={images}/>
           </div>
           <div className="col-lg-6">
             <AnimateKeyframes
