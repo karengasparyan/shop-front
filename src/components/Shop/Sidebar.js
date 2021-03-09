@@ -11,7 +11,7 @@ import _ from "lodash";
 import memoizeOne from "memoize-one";
 import queryString from 'query-string';
 import Utils from "../../helpers/Utils";
-import {initPage, setPage} from "../../store/actions/reduxSetState";
+import { setPage } from "../../store/actions/reduxSetState";
 
 class Sidebar extends Component {
   static propTypes = {}
@@ -107,7 +107,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { attributeFilter, sidebarTitles, price } = this.props;
+    const { attributeFilter, sidebarTitles, price, products } = this.props;
 
     let filter = [];
     if (!_.isEmpty(sidebarTitles)) {
@@ -122,8 +122,8 @@ class Sidebar extends Component {
     this.initProductsRequest(query)
     return (
       <div style={{ width: '100%' }} className="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
-        {Utils.filterArrayOrder(sidebarTitles, filter).map(f => <div key={f.id} className="filter-widget">
-          <h4 className="fw-title">{f.attributeKey || ''}</h4>
+        {Utils.filterArrayOrder(sidebarTitles, filter, products).map(f => <div key={f.id} className="filter-widget">
+          <p className="fw-title">{f.attributeKey || ''}</p>
           <ul className="filter-catagories">
             {(attributeFilter.filter(a => a.attributeKey === f.attributeKey) || []).map(c =>
               <li key={c.id}>

@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component, ReactNode} from 'react';
+
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Error404 from './pages/Error404';
 import Home from './pages/Home';
@@ -10,6 +11,7 @@ import CheckOut from "./components/Shop/CheckOut";
 import {ToastContainer} from "react-toastify";
 import ShippingAndPayment from "./pages/ShippingAndPayment";
 import Guarantee from "./pages/Guarantee";
+import Helmet from 'react-helmet';
 
 class App extends Component {
   render() {

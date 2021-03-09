@@ -267,7 +267,7 @@ class Product extends Component {
                               </div>
                             </div>
                             <div className="pi-text">
-                              {p.attributes.filter(a => a.attributeKey !== 'положение' && a.attributeKey !== 'seo' &&
+                              {p.attributes.filter(a => a.attributeKey !== 'положение' &&
                                 a.attributeKey !== 'секция комплектация').map(a =>
                                 <div className="catagory-name">{a.attributeValue}</div>)}
                               <Link to={`/product/${p.id}`}><h5>{Utils.sliceText(p.name, 30)}</h5></Link>
@@ -308,7 +308,7 @@ class Product extends Component {
                   <table>
                     <tbody>
                     {singleProduct?.attributes?.filter(f =>
-                      f.attributeKey.toLowerCase() !== 'seo' && f.attributeKey.toLowerCase() !== 'положение').map(a => <tr>
+                      f.attributeKey.toLowerCase() && f.attributeKey.toLowerCase() !== 'положение').map(a => <tr>
                       <td className="p-catagory">{a.attributeKey}</td>
                       <td>
                         <div className="p-code">{a.attributeValue}</div>

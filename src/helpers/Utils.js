@@ -52,17 +52,20 @@ class Utils {
     }
   }
 
-  static filterArrayOrder(sidebar, filter) {
+  static filterArrayOrder(sidebar, filter, products) {
     let array = [];
-      for (let i = 0; i < sidebar?.length; i++) {
-        for (let j = 0; j < filter?.length; j++) {
-          if (sidebar[i]?.title === filter[j]?.attributeKey) {
-            array.push(filter[j])
-          }
+
+    for (let i = 0; i < sidebar?.length; i++) {
+      for (let j = 0; j < filter?.length; j++) {
+        if (sidebar[i]?.title === filter[j]?.attributeKey) {
+          array.push(filter[j])
         }
       }
-      return array;
+    }
+
+    return array;
   }
+
   static addCard(id, request) {
     let cardIds = JSON.parse(window.localStorage.getItem("cardIds")) || [];
     cardIds.push(id);

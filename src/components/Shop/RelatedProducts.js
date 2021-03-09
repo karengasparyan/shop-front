@@ -57,8 +57,6 @@ class RelatedProducts extends Component {
 
     const direction = process.env.REACT_APP_API_URL;
 
-
-
     return (
       <div className="related-products spad">
         <div className="container">

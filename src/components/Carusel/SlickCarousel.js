@@ -6,7 +6,7 @@ import {CSSTransition} from "react-transition-group";
 import {AnimateGroup, animations, AnimateOnChange} from 'react-animation'
 import PropTypes from "prop-types";
 import Preloader from "../../svg/preloader.svg";
-import {getCardListRequest, singleProductsRequest} from "../../store/actions/products";
+import {getCardListRequest, getProductsRequest, singleProductsRequest} from "../../store/actions/products";
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import _ from "lodash";
@@ -141,7 +141,13 @@ class SlickCarousel extends Component {
           {/*    </div>*/}
           {/*    <img src="/assets/img/01.jpg"/>*/}
           {/*</div>*/}
-          {images.map(i => <div key={i.id}>
+          {images.map(i =>
+            <div className="sliderImageDescContainer" key={i.id}>
+              <div className="sliderImageDesc">
+                <h4>{i.imageTitle}</h4>
+                <p>{i.imageDescription}</p>
+                <Link to={`/shop?s=${i.catalogLink}`} className="inCatalog" >В КАТАЛОГ</Link>
+              </div>
             <img src={`${direction}/sliderImages/${i.path}`} alt={`image_${i.id}`}/>
           </div>)}
         </Slider>
@@ -156,6 +162,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   singleProductsRequest,
   getCardListRequest,
+  getProductsRequest,
 };
 
 const Container = connect(
