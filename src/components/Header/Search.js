@@ -133,7 +133,7 @@ class Search extends Component {
                       alt={`image_${p.id}`}/>
                     <div style={{display: 'flex', flexWrap: 'wrap'}}>
                       <span>{Utils.sliceText(p.name, 25)},</span>
-                      {p.attributes.map(a => <Fragment key={a.key}>
+                      {p.attributes.filter(f => f.attributeKey !== 'секция комплектация').map(a => <Fragment key={a.key}>
                         <span>{a.attributeKey} - </span>
                         <span>{a.attributeValue},</span>
                       </Fragment>)}

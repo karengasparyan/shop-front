@@ -308,7 +308,8 @@ class Product extends Component {
                   <table>
                     <tbody>
                     {singleProduct?.attributes?.filter(f =>
-                      f.attributeKey.toLowerCase() && f.attributeKey.toLowerCase() !== 'положение').map(a => <tr>
+                      f.attributeKey.toLowerCase() && f.attributeKey.toLowerCase() !== 'положение' &&
+                      f.attributeKey.toLowerCase() !== 'секция комплектация').map(a => <tr>
                       <td className="p-catagory">{a.attributeKey}</td>
                       <td>
                         <div className="p-code">{a.attributeValue}</div>
