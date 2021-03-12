@@ -1,0 +1,282 @@
+:root {
+  --brandColor: rgba(255, 0, 19, 0.7);
+  --sectionBg: rgba(205, 205, 205, 0.7);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--brandColor);
+
+  &:hover {
+    background: #585858;
+    cursor: pointer;
+  }
+}
+
+.ContactTel {
+  color: #3d3d3d;
+  transition: 0.5s;
+  font-weight: bold;
+
+  &:hover {
+    color: var(--brandColor);
+    transition: 0.5s;
+  }
+
+  &:focus {
+    color: var(--brandColor);
+    transition: 0.5s;
+  }
+
+}
+
+.contactIcon {
+  margin: 5px;
+  font-size: 16px;
+}
+
+.sectionBackground {
+  background-color: var(--sectionBg);
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #5c5c5c;
+  transition: 1s;
+  font-size: 25px;
+}
+
+.slick-prev {
+  left: 20px;
+  z-index: 9999;
+}
+
+.slick-next {
+  right: 20px;
+  z-index: 9999;
+
+}
+
+.countDownSection {
+  background-color: #f3f0e5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  img {
+    width: 55vh;
+    max-width: 75%;
+    min-width: 70%;
+    transition: 0.5s;
+
+    &:hover {
+      box-shadow: 0 0 0.7em #c4beb9;
+      transition: 0.5s;
+    }
+  }
+}
+
+.guaranteeContainerColor {
+  background-color: #303030;
+  margin-bottom: 50px;
+
+  .guaranteeContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0 10px 0;
+    justify-content: space-around;
+
+    .guarantee {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      vertical-align: middle;
+      padding: 15px;
+      margin: 5px;
+      width: 24%;
+      min-width: 24%;
+
+      img {
+        margin: 10px;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.compTitle {
+  width: 100%;
+  min-width: max-content;
+  max-width: max-content;
+  font-weight: bold;
+  font-size: 20px;
+  color: #4b4b4b;
+  border-bottom: var(--brandColor) solid 3px;
+  padding-bottom: 2px;
+  margin: 10px auto;
+}
+
+.shopContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: -15px;
+  margin-left: -15px;
+  position: relative;
+}
+
+.product-list {
+  width: 100%;
+}
+
+.preloaderContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 50px;
+  }
+}
+
+.inputValidationError {
+  color: var(--brandColor);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.primary-btn-custom {
+  display: inline-block;
+  max-width: 14em;
+  font-weight: bold;
+  color: var(--brandColor);
+  background-color: #ffffff;
+  padding: 2vh 3vw;
+  font-size: 1em;
+  border-radius: 3px;
+  transition: 0.5s;
+  border: solid 1px var(--brandColor);
+  margin: 10px auto;
+  cursor: pointer;
+  &:hover {
+    transition: 0.5s;
+    background-color: var(--brandColor);
+    color: #ffffff;
+  }
+}
+
+.shippingAndPaymentTitle {
+  color: #424242;
+  margin: 10px 0;
+}
+
+.guaranteeDescription {
+  margin-left: 30px;
+}
+
+.ReactModal__Overlay {
+  transform: translateX(-400px);
+  transition: 0.5s ;
+}
+
+.ReactModal__Overlay--after-open {
+  transform: translateY(0px);
+}
+.ReactModal__Overlay--before-close {
+  transform: translateX(-400px);
+}
+
+.sliderContainer {
+  img {
+    width: 100%;
+    border: solid 4px #6d6d6d;
+  }
+}
+
+.sliderImagesContainer {
+  position: relative;
+
+  .closeModal {
+    position: absolute;
+    top: -14px;
+    right: -30px;
+    z-index: 99999;
+    line-height: 0;
+    font-weight: bold;
+    font-size: 30px;
+    color: rgb(255, 128, 128);
+    margin: 0 10px 10px 10px;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      color: rgba(255, 0, 0, 1);
+      transition: 0.5s;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.sliderImageDescContainer {
+  position: relative;
+  z-index: 9999;
+
+  .sliderImageDesc {
+    max-width: 35%;
+    position: absolute;
+    top: 40%;
+    left: 8%;
+
+    h4 {
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 2.8vw;
+      line-height: 1em;
+      margin-bottom: 1em;
+    }
+
+    p {
+      color: #ffffff;
+      font-size: 1.8vw;
+      line-height: 1em;
+      margin-bottom: 2em;
+    }
+
+    .inCatalog {
+      display: inline-block;
+      font-weight: bold;
+      color: var(--brandColor);
+      background-color: #ffffff;
+      padding: 2.4vh 4vw;
+      font-size: 1.5vw;
+      border-radius: 3px;
+      transition: 0.5s;
+
+      &:hover {
+        transition: 0.5s;
+        background-color: var(--brandColor);
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.buttonFilters {
+  cursor: pointer;
+}
