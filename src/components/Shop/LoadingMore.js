@@ -18,7 +18,7 @@ class LoadingMore extends Component {
   loadMore = (ev) => {
     ev.preventDefault();
     let {page, setPage} = this.props;
-    const {productCount, history} = this.props;
+    const {productCount} = this.props;
     const {current} = this.scrollBottom;
     let query = queryString.parse(window.location.search);
 
@@ -27,7 +27,6 @@ class LoadingMore extends Component {
       setPage(page);
       this.props.getProductsRequest({...query, page})
       current.scrollIntoView({block: "center", behavior: "smooth"});
-      // history.push('?' + queryString.stringify({...query, page}))
     }
   }
 

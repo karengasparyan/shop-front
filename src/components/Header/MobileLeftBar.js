@@ -2,21 +2,26 @@ import React, {Component, Fragment} from 'react';
 import ReactProSlider from './ReactProSlider';
 import Modal from "react-modal";
 import Sidebar from "../Shop/Sidebar";
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import Utils from "../../helpers/Utils";
 import {MenuItem} from "react-pro-sidebar";
+import {connect} from "react-redux";
+import {getProductsRequest} from "../../store/actions/products";
+import Logo from "./Logo";
 
 class MobileLeftBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false
+      show: false,
+      showCatalog: false,
     }
     this.modalStyle = {
       overlay: {
         width: '100%',
         height: 'auto',
-        backgroundColor: 'rgba(0,0,0,0.0)',
+        backgroundColor: 'rgba(0,0,0,0)',
+        zIndex: 999999,
       },
       content: {
         width: '60%',
@@ -27,7 +32,6 @@ class MobileLeftBar extends Component {
         background: '#ffffff',
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch',
-        borderRadius: 10,
         outline: 'none',
         padding: 20,
       }
@@ -39,8 +43,19 @@ class MobileLeftBar extends Component {
     this.setState({show: !show})
   };
 
+  changeAttribute = (catalog) => {
+    const query = {'каталог': catalog}
+    this.props.getProductsRequest(query)
+    this.props.history.push(`/shop?каталог=${catalog}`)
+    this.setState({show: false})
+  }
+
+  showCatalog = (showCatalog) => {
+    this.setState({showCatalog})
+  }
+
   render() {
-    const {show} = this.state;
+    const {show, showCatalog} = this.state;
     const {catalog} = this.props;
     return (
       <Fragment>
@@ -63,13 +78,29 @@ class MobileLeftBar extends Component {
           contentLabel="leftBar"
           style={this.modalStyle}
         >
-          <div>
-            {catalog.map(c => <NavLink
-              key={c.id}
+          <ul className="menuContainer">
+            <li><Logo /></li>
+            <li
+              onMouseOver={() => this.showCatalog(true)}
+            >КАТАЛОГ</li>
+            <ul onMouseLeave={() => this.showCatalog(false)}>
+            {showCatalog && catalog.map(c => <li key={c.id}>
+              <NavLink
               onClick={()=>this.changeAttribute(c.attributeValue)}
-              to={`/shop?каталог=${c.attributeValue}`}>
+              to={`/shop?каталог=${c.attributeValue}`}
+              className="menuLinks">
               {Utils.upperCase(c.attributeValue)}
-            </NavLink>)}
+            </NavLink>
+            </li>)}
+            </ul>
+            <li><NavLink className="menuLinks" to="/shop">НОВОСТИ И АКЦИИ</NavLink></li>
+            <li><NavLink className="menuLinks" to="/shipping-payment">ДОСТАВКА И ОПЛАТА</NavLink></li>
+            <li><NavLink className="menuLinks" to="/guarantee">ГАРАНТИЯ</NavLink></li>
+            <li><NavLink className="menuLinks" to="/contacts">О МАГАЗИНЕ</NavLink></li>
+          </ul>
+          <div className="menuPhone">
+            <i className="contactIcon fa fa-phone"/>
+            <a className="ContactTel" href="tel:+79996955303">8 (999) 695-53-03</a>
           </div>
         </Modal>
       </Fragment>
@@ -77,4 +108,14 @@ class MobileLeftBar extends Component {
   }
 }
 
-export default MobileLeftBar;
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = {
+  getProductsRequest,
+};
+
+const Container = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(MobileLeftBar));
+
+export default Container;

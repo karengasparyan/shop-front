@@ -52,9 +52,9 @@ class Utils {
     }
   }
 
-  static filterArrayOrder(sidebar, filter, products) {
+  static filterArrayOrder(sidebar, filter) {
     let array = [];
-
+    _.uniqBy(filter, 'attributeKey')
     for (let i = 0; i < sidebar?.length; i++) {
       for (let j = 0; j < filter?.length; j++) {
         if (sidebar[i]?.title === filter[j]?.attributeKey) {

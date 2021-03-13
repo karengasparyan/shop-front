@@ -17,7 +17,6 @@ class Products extends Component {
     super(props);
     this.state = {
       showBuyMenu: null,
-      singleCount: [],
     }
   }
 
@@ -37,8 +36,9 @@ class Products extends Component {
     }
   }, _.isEqual)
 
+
   render() {
-    let {products, cardProducts, showSidebar} = this.props;
+    let {products, cardProducts, productsRequestStatus} = this.props;
     const {showBuyMenu} = this.state;
 
     if (!products) {
@@ -56,7 +56,7 @@ class Products extends Component {
     return (
       <div className="product-list">
         <div className="row">
-          {_.isEmpty(products) ? <p>Поиск не дал результатов</p> :
+          {_.isEmpty(products) && productsRequestStatus === 'success' ? <p>Поиск не дал результатов</p> :
             (products).map(p => <div className="col-lg-4 col-sm-6">
               <AnimateKeyframes
                 play={!_.isEmpty(products)}
@@ -124,6 +124,7 @@ const mapStateToProps = (state) => ({
   products: state.products.products,
   productCount: state.products.productCount,
   cardProducts: state.products.cardProducts,
+  productsRequestStatus: state.products.productsRequestStatus,
 });
 const mapDispatchToProps = {
   getProductsRequest,

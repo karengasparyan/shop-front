@@ -64,10 +64,6 @@ class Footer extends Component {
                       <i className="contactIcon fa fa-phone"/>
                       <a className="ContactTel" href="tel:+79996955303">8 (999) 695-53-03</a>
                     </li>
-                    <li>
-                      <i className="contactIcon fa fa-phone"/>
-                      <a className="ContactTel" href="tel:+79054530203">8 (905) 453-02-03</a>
-                    </li>
                     {/*<li>Email: hello.colorlib@gmail.com</li>*/}
                   </ul>
                   <div className="footer-social">

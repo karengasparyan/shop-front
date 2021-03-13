@@ -8,8 +8,7 @@
     position: 'fixed',
     top: '-5%',
     left: '20vw',
-    // margin: '0 auto',
-    backgroundColor: 'rgba(149,149,149,0)'
+    backgroundColor: 'rgba(149,149,149,0)',
   },
   content: {
     width: '40%',
@@ -22,7 +21,6 @@
     background: '#6d6d6d',
     overflow: 'hidden',
     WebkitOverflowScrolling: 'touch',
-    borderRadius: 10,
     outline: 'none',
     padding: 30,
   }

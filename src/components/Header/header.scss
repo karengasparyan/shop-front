@@ -25,12 +25,13 @@
 
   .searchLists {
     width: 94%;
-    min-height: 100px;
-    max-height: 200px;
+    min-width: 80px;
+    min-height: 150px;
+    max-height: 300px;
     position: absolute;
     overflow-y: auto;
     overflow-x: hidden;
-    z-index: 9999;
+    z-index: 99999;
     list-style-type: none;
     background-color: #ffffff;
     padding: 5px 25px;
@@ -337,9 +338,6 @@
   }
   .nav-item .nav-menu li a {
     padding: 16px 10px 15px;
-  }
-  .searchContainer {
-    margin-left: -4%;
   }
   .slicknav_btn {
     right: -5%;

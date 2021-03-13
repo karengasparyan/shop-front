@@ -49,8 +49,8 @@ class SaleBanner extends Component {
                 <Media queries={{
                   smallMax: "(max-width: 575px)",
                   small: "(min-width: 576px) and (max-width: 767px)",
-                  medium: "(min-width: 768px) and (max-width: 1199px)",
-                  large: "(min-width: 1200px) and (max-width: 1920px)"
+                  medium: "(min-width: 768px) and (max-width: 1919px)",
+                  large: "(min-width: 1920px)"
                 }}>
                   {matches => (
                     <Fragment>
@@ -61,7 +61,6 @@ class SaleBanner extends Component {
                     </Fragment>
                   )}
                 </Media>
-
               </div>
             </div>
           </div>

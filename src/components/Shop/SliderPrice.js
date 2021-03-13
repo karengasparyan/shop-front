@@ -33,15 +33,15 @@ class SliderPrice extends Component {
         <div className="range-slider">
           <div className="price-input">
             {value.map((v, i) =>
-              <Fragment>
-                <span>₽ </span>
+              <div>
+                <label htmlFor="цена">{i === 0 ? 'от' : 'до'}&nbsp;
                 <input
                   onChange={(ev) => this.inputHandleChange(ev, i)}
                   value={v}
                   type="number"
                   name="price"
-                />
-              </Fragment>
+                />₽</label>
+              </div>
             )}
           </div>
         </div>

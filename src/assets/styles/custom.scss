@@ -66,7 +66,6 @@
 .slick-next {
   right: 20px;
   z-index: 9999;
-
 }
 
 .countDownSection {
@@ -135,13 +134,13 @@
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
-  margin-right: -15px;
-  margin-left: -15px;
   position: relative;
 }
 
 .product-list {
   width: 100%;
+  height: max-content;
+  min-height: 500px;
 }
 
 .preloaderContainer {
@@ -174,6 +173,7 @@
   border: solid 1px var(--brandColor);
   margin: 10px auto;
   cursor: pointer;
+
   &:hover {
     transition: 0.5s;
     background-color: var(--brandColor);
@@ -192,12 +192,14 @@
 
 .ReactModal__Overlay {
   transform: translateX(-400px);
-  transition: 0.5s ;
+  transition: 0.5s;
 }
 
 .ReactModal__Overlay--after-open {
   transform: translateY(0px);
+  z-index: 9999;
 }
+
 .ReactModal__Overlay--before-close {
   transform: translateX(-400px);
 }
@@ -234,28 +236,33 @@
 }
 
 .sliderImageDescContainer {
-  position: relative;
   z-index: 9999;
 
   .sliderImageDesc {
-    max-width: 35%;
-    position: absolute;
-    top: 40%;
-    left: 8%;
+    position: relative;
+    background-repeat: no-repeat;
+    min-height: 600px;
+
+    .sliderImage {
+      max-width: calc(35vw + 2%);
+      position: absolute;
+      top: 40%;
+      left: 8%;
+    }
 
     h4 {
       font-weight: bold;
       color: #ffffff;
-      font-size: 2.8vw;
+      font-size: 35px;
       line-height: 1em;
       margin-bottom: 1em;
     }
 
     p {
       color: #ffffff;
-      font-size: 1.8vw;
+      font-size: 20px;
       line-height: 1em;
-      margin-bottom: 2em;
+      margin-bottom: 1.8em;
     }
 
     .inCatalog {
@@ -264,7 +271,7 @@
       color: var(--brandColor);
       background-color: #ffffff;
       padding: 2.4vh 4vw;
-      font-size: 1.5vw;
+      font-size: 16px;
       border-radius: 3px;
       transition: 0.5s;
 
@@ -278,5 +285,77 @@
 }
 
 .buttonFilters {
+  display: flex;
+  justify-self: flex-end;
+  width: 30px;
   cursor: pointer;
+  position: sticky;
+  z-index: 99999;
+  top: 30%;
+  opacity: 0.5;
+  transition: 0.5s;
+  float: right;
+  margin-right: 25px;
+
+  &:hover {
+    transition: 0.5s;
+    opacity: 1;
+    fill: #262626;
+  }
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  cursor: pointer;
+
+  li {
+    color: #2a2a2a;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  ul {
+    list-style-type: none;
+
+    li {
+      color: #2a2a2a;
+      font-size: 1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.menuLinks {
+  color: #2a2a2a;
+  text-transform: uppercase;
+
+  &:hover {
+    color: #2a2a2a;
+  }
+}
+
+.menuPhone {
+  width: 50%;
+  min-width: max-content;
+  display: flex;
+  align-self: end;
+  justify-self: end;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 15px;
+  margin: 10em auto 0 auto;
+  border: solid 2px var(--brandColor);
+}
+
+.logo {
+  width: 100%;
+  a {
+    img {
+      min-width: 50%;
+    }
+  }
 }

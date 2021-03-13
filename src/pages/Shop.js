@@ -7,21 +7,22 @@ import BrandCrumb from "../components/BrandCrumb";
 import LoadingMore from "../components/Shop/LoadingMore";
 import Media from "react-media";
 import Modal from 'react-modal';
-import Preloader from "../svg/preloader.svg";
+import filters from "../svg/filters.svg";
 
 
 class Shop extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       showSidebar: false,
-      noRender: undefined,
     }
     this.modalStyle = {
       overlay: {
         width: '100%',
         height: 'auto',
-        backgroundColor: 'rgba(0,0,0,0.0)',
+        backgroundColor: 'rgba(0,0,0,0)',
+        zIndex: 99999,
       },
       content: {
         width: '50%',
@@ -40,27 +41,25 @@ class Shop extends Component {
   }
 
   showSidebar = () => {
-
     const {showSidebar} = this.state;
     this.setState({showSidebar: !showSidebar})
   }
 
-
-
   render() {
-    const {showSidebar, noRender} = this.state;
-    const {productsRequestStatus} = this.props;
-
+    const {showSidebar} = this.state;
     return (
       <Wrapper>
         <BrandCrumb crumb="Магазин"/>
         <section className="product-shop spad">
+          <Media query="(max-width: 767px)" render={() => (
+            <img
+              className="buttonFilters"
+              onClick={this.showSidebar}
+              title="Филтеры"
+              src={filters}
+            />
+          )}/>
           <div className="container">
-            <Media query="(max-width: 767px)" render={() => (
-                <p className="buttonFilters"
-                   onClick={this.showSidebar}
-                   title="Филтеры"
-                >Филтеры</p>)}/>
             <div className="shopContainer">
               <Products />
               <Media queries={{
@@ -68,7 +67,7 @@ class Shop extends Component {
               }}>
                 {matches => (
                   <Fragment>
-                    {!matches.small && <Sidebar/>}
+                    {!matches.small && <Sidebar position="sticky" />}
                     {matches.small && <Fragment>
                       <Modal
                         closeTimeoutMS={500}
@@ -77,7 +76,7 @@ class Shop extends Component {
                         contentLabel="filters"
                         style={this.modalStyle}
                       >
-                        <Sidebar noRender={noRender} />
+                        <Sidebar showSidebar={showSidebar}  />
                       </Modal>
                     </Fragment>
                     }

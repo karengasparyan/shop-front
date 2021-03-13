@@ -38,10 +38,10 @@ class Header extends Component {
 
   render() {
     const {show} = this.state;
-    const {innerWidth, catalog} = this.props;
+    const {innerWidth, position, catalog} = this.props;
 
     return (
-      <header className="header-section">
+      <header style={{position, top: 0, zIndex: 99999, backgroundColor: '#ffffff'}} className="header-section">
         <ContactsHeader />
         <div className="container">
           <div className="inner-header">

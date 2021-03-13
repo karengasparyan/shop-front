@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import Slider from "react-slick";
 import Radium, {StyleRoot} from 'radium';
 // import {bounce} from "react-animations";
@@ -12,6 +12,7 @@ import {Link, withRouter} from "react-router-dom";
 import _ from "lodash";
 import {toast} from "react-toastify";
 import Utils from "../../helpers/Utils";
+import Media from "react-media";
 // import styles from '../../helpers/AnimationStyles'
 
 // https://react-slick.neostack.com/docs/example/simple-slider
@@ -100,13 +101,12 @@ class SlickCarousel extends Component {
               <div className="pi-pic"
                    onMouseOver={() => this.showBuyMenu(i.id)}
                    onMouseLeave={() => this.showBuyMenu(null)} key={i.id}>
-                <img style={{width: '100%', height: '100%'}}
-                     src={`${direction}/productImage/${i.id}/${i.images[0].path}`}
+                <img width={'100%'} src={`${direction}/productImage/${i.id}/${i.images[0].path}`}
                      alt={`image_${i.id}`}/>
                 <AnimateGroup animation="fade">
                   {+showBuyMenu === +i.id && <ul>
                     {i.qty > 0 && <li className="w-icon active">
-                      <a onClick={() => Utils.addCard(i.id,this.props.getCardListRequest)}>
+                      <a onClick={() => Utils.addCard(i.id, this.props.getCardListRequest)}>
                         <i className="icon_bag_alt"/></a>
                     </li>}
                     <li className="quick-view"><Link to={`/product/${i.id}`}>Просмотр</Link></li>
@@ -143,13 +143,16 @@ class SlickCarousel extends Component {
           {/*</div>*/}
           {images.map(i =>
             <div className="sliderImageDescContainer" key={i.id}>
-              <div className="sliderImageDesc">
-                <h4>{i.imageTitle}</h4>
-                <p>{i.imageDescription}</p>
-                <Link to={`/shop?s=${i.catalogLink}`} className="inCatalog" >В КАТАЛОГ</Link>
+              <div className="sliderImageDesc"
+                style={{background: `url(${`${direction}/sliderImages/${i.path}`})`, backgroundPosition: "center"}}>
+                <div className="sliderImage">
+                  <h4>{i.imageTitle}</h4>
+                  <p>{i.imageDescription}</p>
+                  <Link to={`/shop?s=${i.catalogLink}`} className="inCatalog">В КАТАЛОГ</Link>
+                </div>
               </div>
-            <img src={`${direction}/sliderImages/${i.path}`} alt={`image_${i.id}`}/>
-          </div>)}
+              {/*<img src={`${direction}/sliderImages/${i.path}`} alt={`image_${i.id}`}/>*/}
+            </div>)}
         </Slider>
       </section>
     );
