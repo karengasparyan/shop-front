@@ -191,6 +191,7 @@ ol {
   color: #ffffff;
   background: var(--brandColor);
   text-transform: uppercase;
+  min-width: max-content;
 }
 
 .site-btn {
@@ -487,10 +488,6 @@ ol {
   background: var(--brandColor);
   padding: 12px 16px 12px;
   cursor: pointer;
-}
-
-.inner-header .nav-right {
-  padding: 10px 0 0 0;
 }
 
 .inner-header .nav-right li {
@@ -930,7 +927,7 @@ ol {
 
 .banner-section {
   padding: 20px 30px 20px 30px;
-  background-color: #f2eee4;
+  background-color: var(--sectionBg);
 
   .banners {
     display: flex;
@@ -1037,10 +1034,12 @@ ol {
 }
 
 .product-large {
-  img {
-    max-width: 100%;
-    margin: 0 auto;
-  }
+
+    img {
+      min-width: 80%;
+      margin: 0 auto;
+    }
+
 }
 
 .product-large a {
@@ -4014,6 +4013,10 @@ ol {
     }
   }
 
+  .rc-slider {
+    width: 70%;
+  }
+
   .header-top .ht-right .login-panel {
     padding-left: 10px;
   }
@@ -4244,6 +4247,14 @@ ol {
 /* Small Device: 320px */
 
 @media only screen and (max-width: 479px) {
+  .logo {
+    a {
+      img {
+        min-width: 100%;
+        margin-right: 30px;
+      }
+    }
+  }
   .instagram-photo .insta-item {
     width: 100%;
   }

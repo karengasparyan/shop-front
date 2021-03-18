@@ -34,7 +34,12 @@ app.listen(PORT, () => {
 async function getHeaders(originalUrl) {
   let title = 'Магазин';
   let description = 'Магазин тест';
-  const image = 'https://frontend-dev.bioneex.com/img/banner.jpg';
+  let image = '';
+  let sliderData = [];
+  await axios.get(`http://localhost:4000/products/slider-images-list`).then(res => {
+    image = `http://localhost:4000/sliderImages/${res.data[0].path}` || 'chka';
+    sliderData = res.data[0]
+  })
   let singleProduct = [];
   let images = [];
   try {
@@ -46,17 +51,9 @@ async function getHeaders(originalUrl) {
          description = singleProduct.metaDescription ? singleProduct.metaName : 'chkaDescription'
      })
       images = _.get(singleProduct,['images']).map(i => i.path)
+    } else if (originalUrl.startsWith('/')) {
+      image = sliderData.description;
     }
-    // if (originalUrl.startsWith('/sign-up/plans') && originalUrl.includes('sign_up')) {
-    //   title = 'Sign Up - Biopharma R&D Exchange Platform for Drug Candidates Licensing';
-    // } else if (originalUrl.startsWith('/sign-up/plans')) {
-    //   title = 'Plans & Pricing - Biopharma R&D Exchange Platform for Drug Candidates Licensing';
-    // } else if (originalUrl.startsWith('/sign-up')) {
-    //   title = 'Sign Up - Biopharma R&D Exchange Platform for Drug Candidates Licensing';
-    // } else if (originalUrl === '/' || originalUrl.startsWith('/login')) {
-    //   title = 'Log In - Biopharma R&D Exchange Platform for Drug Candidates Licensing';
-    // } else if (originalUrl.startsWith('/sign-up')) {
-    // }
   } catch (e) {
     console.error(e);
   }

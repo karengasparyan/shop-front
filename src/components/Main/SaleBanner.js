@@ -5,6 +5,7 @@ import SlickCarousel from "../Carusel/SlickCarousel";
 import Preloader from "../../svg/preloader.svg";
 import {getNewRequest, getSaleRequest} from "../../store/actions/products";
 import Media from 'react-media'
+import MobileLeftBar from "../Header/MobileLeftBar";
 
 class SaleBanner extends Component {
 
@@ -54,10 +55,14 @@ class SaleBanner extends Component {
                 }}>
                   {matches => (
                     <Fragment>
-                      {matches.smallMax && <SlickCarousel images={products} slidesToShow={1} arrows={true} homeSlider={true}/>}
-                      {matches.small && <SlickCarousel images={products} slidesToShow={2} arrows={true} homeSlider={true}/>}
-                      {matches.medium && <SlickCarousel images={products} slidesToShow={3} arrows={true} homeSlider={true}/>}
-                      {matches.large && <SlickCarousel images={products} slidesToShow={4} arrows={true} homeSlider={true}/>}
+                      {matches.smallMax &&
+                      <SlickCarousel images={products} slidesToShow={1} arrows={true} homeSlider={true}/>}
+                      {matches.small &&
+                      <SlickCarousel images={products} slidesToShow={2} arrows={true} homeSlider={true}/>}
+                      {matches.medium &&
+                      <SlickCarousel images={products} slidesToShow={3} arrows={true} homeSlider={true}/>}
+                      {matches.large &&
+                      <SlickCarousel images={products} slidesToShow={4} arrows={true} homeSlider={true}/>}
                     </Fragment>
                   )}
                 </Media>

@@ -8,6 +8,8 @@ import _ from "lodash";
 import {Link, withRouter} from "react-router-dom";
 import queryString from 'query-string';
 import Utils from "../../helpers/Utils";
+import {CSSTransition} from "react-transition-group";
+import {Animate} from "react-simple-animate";
 
 class Search extends Component {
 
@@ -93,59 +95,57 @@ class Search extends Component {
   }
 
   render() {
-    const {products, productsRequestStatus, match: {path}} = this.props;
+    const {products, productsRequestStatus, match: {path},} = this.props;
     let {showSearch} = this.state;
     let query = queryString.parse(window.location.search);
     if (!products) {
       return <img src={Preloader} width="40px" height="40px"/>;
     }
 
-
     const direction = process.env.REACT_APP_API_URL;
 
     return (
-      <div
-        className="col-lg-5 col-md-7 searchContainer">
-        <div className="advanced-search">
-          {/*<div className="category-btn">КАТЕГОРИИ</div>*/}
-          <div className="input-group">
-            <input
-              type="text"
-              placeholder="Что вам нужно?"
-              value={query.s}
-              onChange={this.onChangeSearch}
-              onClick={this.showSearch}
-            />
-            {/*<button type="button"><i className="ti-search"/></button>*/}
+        <Fragment>
+          <div className="advanced-search">
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Что вам нужно?"
+                value={query.s}
+                onChange={this.onChangeSearch}
+                onClick={this.showSearch}
+              />
+              {/*<button type="button"><i className="ti-search"/></button>*/}
+            </div>
           </div>
-        </div>
-        <AnimateGroup durationIn={200} animation="bounce">
-          {showSearch && path !== '/shop' &&
-          <ul onScroll={this.changeRequest} ref={this.searchListRef} className="searchLists">
-            <AnimateGroup durationIn={200} animation="bounce">
-              {_.isEmpty(products) ? <p>Поиск не дал результатов</p> :
-                products.map(p => <li key={p.id}>
-                  <Link to={`/product/${p.id}`} style={{display: 'flex'}}>
-                    <img
-                      width={100}
-                      height={100}
-                      src={`${direction}/productImage/${p.id}/${p.images[0].path}`}
-                      alt={`image_${p.id}`}/>
-                    <div style={{display: 'flex', flexWrap: 'wrap'}}>
-                      <span>{Utils.sliceText(p.name, 25)},</span>
-                      {p.attributes.filter(f => f.attributeKey !== 'секция комплектация').map(a => <Fragment key={a.key}>
-                        <span>{a.attributeKey} - </span>
-                        <span>{a.attributeValue},</span>
-                      </Fragment>)}
-                    </div>
-                  </Link>
-                  <hr/>
-                </li>)}
-              {productsRequestStatus === 'request' && <li><img src={Preloader} width="50px"/></li>}
-            </AnimateGroup>
-          </ul>}
-        </AnimateGroup>
-      </div>
+          <AnimateGroup durationIn={200} animation="bounce">
+            {showSearch && path !== '/shop' &&
+            <ul onScroll={this.changeRequest} ref={this.searchListRef} className="searchLists">
+              <AnimateGroup durationIn={200} animation="bounce">
+                {_.isEmpty(products) ? <p>Поиск не дал результатов</p> :
+                  products.map(p => <li key={p.id}>
+                    <Link to={`/product/${p.id}`} style={{display: 'flex'}}>
+                      <img
+                        width={100}
+                        height={100}
+                        src={`${direction}/productImage/${p.id}/${p.images[0].path}`}
+                        alt={`image_${p.id}`}/>
+                      <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                        <span>{Utils.sliceText(p.name, 25)},</span>
+                        {p.attributes.filter(f => f.attributeKey !== 'секция комплектация').map(a => <Fragment
+                          key={a.key}>
+                          <span>{a.attributeKey} - </span>
+                          <span>{a.attributeValue},</span>
+                        </Fragment>)}
+                      </div>
+                    </Link>
+                    <hr/>
+                  </li>)}
+                {productsRequestStatus === 'request' && <li><img src={Preloader} width="50px"/></li>}
+              </AnimateGroup>
+            </ul>}
+          </AnimateGroup>
+        </Fragment>
     );
   }
 }

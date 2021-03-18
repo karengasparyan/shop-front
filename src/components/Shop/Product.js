@@ -154,7 +154,8 @@ class Product extends Component {
             {/*<SlickCarousel openModal={this.openModal} images={singleProduct.images} arrows={showSliderArrows} product={true}/>*/}
           <ImageGallery items={images}/>
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-1"/>
+          <div className="col-lg-5">
             <AnimateKeyframes
               play={!_.isEmpty(this.props.singleProduct)}
               duration={1}
@@ -181,7 +182,7 @@ class Product extends Component {
                     max={singleProduct.qty}
                   />}
                 </div>
-                <Link to={`/product/${singleProduct.id}`} className="primary-btn pd-cart"
+                <Link to={`/product/${singleProduct.id}`} className="primary-btn"
                        onClick={() => this.addCard(singleProduct.id)}
                 >в корзину</Link>
               </div>}
@@ -227,7 +228,7 @@ class Product extends Component {
               <div className={classnames('tab-pane', activeTab === 'ДРУГИЕ ЦВЕТА' && 'active')} id="tab-3">
                 <div className="customer-review-option">
                   <h4>Также можете выбрать</h4>
-                  <div className="product-list">
+                  <div className="product-list" style={{minHeight: 0}}>
                     <div className="row">
                       {_.isEmpty(singleProduct.relatedProducts) ? <p>нет информации</p> :
                         singleProduct.relatedProducts.map(p => <div className="col-lg-4 col-sm-6">

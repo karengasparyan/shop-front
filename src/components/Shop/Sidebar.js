@@ -48,13 +48,12 @@ class Sidebar extends Component {
       let titlesArray = [];
       title.map(t => titlesArray.push(t.title))
       this.props.getFilterListRequest(titlesArray)
-      console.log('memoize Title')
     }
   }, _.isEqual)
 
   initProductsRequest = memoizeOne((query) => {
     if (query) {
-      window.scrollTo(0, 150)
+      // window.scrollTo(0, 150)
       let query = queryString.parse(window.location.search, {arrayFormat: 'comma'});
       this.props.getProductsRequest({...query, page: 1});
 
@@ -140,7 +139,7 @@ class Sidebar extends Component {
     }
 
     return (
-      <div className="col-lg-3" style={{position, height: '100%', left: 0, top: 0 }}>
+      <div style={{position, height: '100%', left: 0, top: 0 }}>
         {Utils.filterArrayOrder(sidebarTitles, filter).map(f => <div key={f.id} className="filter-widget">
           <p className="fw-title">{f.attributeKey || ''}</p>
           <ul className="filter-catagories">

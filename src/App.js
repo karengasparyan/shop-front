@@ -12,6 +12,8 @@ import {ToastContainer} from "react-toastify";
 import ShippingAndPayment from "./pages/ShippingAndPayment";
 import Guarantee from "./pages/Guarantee";
 import Helmet from 'react-helmet';
+import Media from "react-media";
+import MobileLeftBar from "./components/Header/MobileLeftBar";
 
 class App extends Component {
   render() {
@@ -42,20 +44,39 @@ class App extends Component {
             <Route component={Error404}/>
           </Switch>
         </BrowserRouter>
-        <ToastContainer
-          hideProgressBar={true}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          closeButton={false}
-          bodyClassName="toastBody"
-          toastClassName={({type}) => contextClass[type || "default"] +
-            " flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
-          }
-        />
+        <Media query="(min-width: 768px)" render={() => (
+          <ToastContainer
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            closeButton={false}
+            bodyClassName="toastBody"
+            toastClassName={({type}) => contextClass[type || "default"] +
+              " flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
+            }
+          />
+        )}/>
+        <Media query="(max-width: 767px)" render={() => (
+          <ToastContainer
+            position="bottom-center"
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            closeButton={false}
+            bodyClassName="toastBody"
+            toastClassName={({type}) => contextClass[type || "default"] +
+              " flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
+            }
+          />
+        )}/>
       </>
     );
   }

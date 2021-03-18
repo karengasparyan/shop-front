@@ -21,11 +21,14 @@ class Shop extends Component {
       overlay: {
         width: '100%',
         height: 'auto',
+        minWidth: '100%',
+        overflowX: 'hidden',
         backgroundColor: 'rgba(0,0,0,0)',
         zIndex: 99999,
       },
       content: {
         width: '50%',
+        minWidth: 300,
         height: '100%',
         top: 0,
         left: 0,
@@ -76,6 +79,7 @@ class Shop extends Component {
                         contentLabel="filters"
                         style={this.modalStyle}
                       >
+                        <span className="closeModal" onClick={this.showSidebar}>x</span>
                         <Sidebar showSidebar={showSidebar}  />
                       </Modal>
                     </Fragment>

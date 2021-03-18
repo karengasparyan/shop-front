@@ -24,7 +24,8 @@ class MobileLeftBar extends Component {
         zIndex: 999999,
       },
       content: {
-        width: '60%',
+        width: '50%',
+        minWidth: 300,
         height: '100%',
         top: 0,
         left: 0,
@@ -58,19 +59,18 @@ class MobileLeftBar extends Component {
     const {show, showCatalog} = this.state;
     const {catalog} = this.props;
     return (
-      <Fragment>
-        <i className="contactIcon fa fa-phone"/>
-        <a className="ContactTel" href="tel:+79996955303">8 (999) 695-53-03</a>
-        <div onClick={this.showMenu} className="slicknav_menu">
-          <span className="slicknav_btn slicknav_collapsed">
-          <span className="slicknav_menutxt">MENU</span>
-          <span className="slicknav_icon">
-                  <span className="slicknav_icon-bar"/>
-                  <span className="slicknav_icon-bar"/>
-                  <span className="slicknav_icon-bar"/>
-                </span>
-          </span>
-        </div>
+      <div className="mobileMenu">
+        {/*<div onClick={this.showMenu} className="slicknav_menu">*/}
+        {/*  <span className="slicknav_btn slicknav_collapsed">*/}
+        {/*  /!*<span className="slicknav_menutxt">MENU</span>*!/*/}
+        {/*  <span className="slicknav_icon">*/}
+        {/*          <span className="slicknav_icon-bar"/>*/}
+        {/*          <span className="slicknav_icon-bar"/>*/}
+        {/*          <span className="slicknav_icon-bar"/>*/}
+        {/*        </span>*/}
+        {/*  </span>*/}
+        {/*</div>*/}
+        <i onClick={this.showMenu} title="Меню" className="icon_menu"/>
         <Modal
           closeTimeoutMS={500}
           isOpen={show}
@@ -78,8 +78,9 @@ class MobileLeftBar extends Component {
           contentLabel="leftBar"
           style={this.modalStyle}
         >
+          <span className="closeModal" onClick={this.showMenu}>x</span>
           <ul className="menuContainer">
-            <li><Logo /></li>
+            <li><Logo style={{margin: 0, padding: 0}} /></li>
             <li
               onMouseOver={() => this.showCatalog(true)}
             >КАТАЛОГ</li>
@@ -103,7 +104,7 @@ class MobileLeftBar extends Component {
             <a className="ContactTel" href="tel:+79996955303">8 (999) 695-53-03</a>
           </div>
         </Modal>
-      </Fragment>
+      </div>
     );
   }
 }

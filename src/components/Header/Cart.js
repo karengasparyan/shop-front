@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import 'react-pro-sidebar/dist/css/styles.css';
 import CartHover from "./CartShow";
@@ -8,6 +8,8 @@ import {getCardListRequest} from "../../store/actions/products";
 import Utils from "../../helpers/Utils";
 import memoizeOne from "memoize-one";
 import {setTotalPrice} from "../../store/actions/reduxSetState";
+import Media from "react-media";
+import MobileLeftBar from "./MobileLeftBar";
 
 class Cart extends Component {
 
@@ -34,15 +36,17 @@ class Cart extends Component {
 
     return (
       <ul className="nav-right">
-        <li onMouseOver={() => showMenu('showCard')} className="cart-icon">
-          <Link to="/shopping-cart">
-            <i className="icon_bag_alt"/>
-            {cardProducts?.length > 0 && <span>{cardProducts?.length}</span>}
-          </Link>
+          <li onMouseOver={() => showMenu('showCard')} className="cart-icon">
+            <Link to="/shopping-cart">
+              <i className="mobileHeaderIcon icon_bag_alt" title={`${totalPrice} ₽`}/>
+              {cardProducts?.length > 0 && <span>{cardProducts?.length}</span>}
+            </Link>
             {show === 'showCard' && path !== '/shopping-cart' && path !== '/check-out' &&
             <CartHover show={show} showMenu={showMenu}/>}
-        </li>
-        <li className="cart-price">{`₽ ${totalPrice}`}</li>
+          </li>
+        <Media query="(min-width: 768px)" render={() => (
+          <li className="cart-price">{`${totalPrice} ₽`}</li>
+        )}/>
       </ul>
     );
   }

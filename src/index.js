@@ -24,7 +24,6 @@ import './assets/styles/toastyfy.scss';
 import './assets/styles/react-tabs.css';
 import './assets/styles/image-gallery.scss';
 import './assets/styles/custom.scss';
-import './assets/styles/media.scss';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
