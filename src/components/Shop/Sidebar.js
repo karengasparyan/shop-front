@@ -139,7 +139,7 @@ class Sidebar extends Component {
     }
 
     return (
-      <div style={{position, height: '100%', left: 0, top: 0 }}>
+      <div>
         {Utils.filterArrayOrder(sidebarTitles, filter).map(f => <div key={f.id} className="filter-widget">
           <p className="fw-title">{f.attributeKey || ''}</p>
           <ul className="filter-catagories">

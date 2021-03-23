@@ -3,11 +3,22 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import SlickCarousel from "../Carusel/SlickCarousel";
 import Preloader from "../../svg/preloader.svg";
-import {getNewRequest, getSaleRequest} from "../../store/actions/products";
+import {getNewRequest, getProductsRequest, getSaleRequest} from "../../store/actions/products";
 import Media from 'react-media'
-import MobileLeftBar from "../Header/MobileLeftBar";
+import memoizeOne from "memoize-one";
+import _ from "lodash";
+import {AnimateGroup} from "react-animation";
+import Utils from "../../helpers/Utils";
+import Slider from "react-slick";
 
 class SaleBanner extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showBuyMenu: null,
+    }
+  }
 
   componentDidMount() {
     const query1 = {'положение': 'акция'}
@@ -16,20 +27,41 @@ class SaleBanner extends Component {
     this.props.getNewRequest(query2);
   }
 
+  getProducts = memoizeOne((argument) => {
+    if (argument === 'saleProducts') {
+      this.props.getProductsRequest({page: 1});
+    } else if (argument === 'newProducts') {
+      this.props.getProductsRequest({page: 1});
+    }
+  }, _.isEqual)
+
+  showBuyMenu = (showBuyMenu) => {
+    this.setState({showBuyMenu})
+  }
+
   render() {
     const {reverse, title, saleProducts, newProducts} = this.props;
+    const {showBuyMenu} = this.state;
 
-    let products = []
+    let products = [];
 
     if (reverse) {
-      products = saleProducts;
+     if (_.isEmpty(saleProducts)){
+       this.getProducts('saleProducts')
+       products = this.props.products;
+     } else {
+       products = saleProducts;
+     }
     } else {
-      products = newProducts;
+      if (_.isEmpty(newProducts)){
+        this.getProducts('newProducts')
+        products = this.props.products.reverse();
+      } else {
+        products = newProducts;
+      }
     }
 
-    if (!products) {
-      return <div className="preloaderContainer"><img src={Preloader} alt="preloader"/></div>
-    }
+    if (!products) { return <div className="preloaderContainer"><img src={Preloader} alt="preloader"/></div> }
 
     const direction = process.env.REACT_APP_API_URL;
 
@@ -62,7 +94,7 @@ class SaleBanner extends Component {
                       {matches.medium &&
                       <SlickCarousel images={products} slidesToShow={3} arrows={true} homeSlider={true}/>}
                       {matches.large &&
-                      <SlickCarousel images={products} slidesToShow={4} arrows={true} homeSlider={true}/>}
+                      <SlickCarousel images={products} slidesToShow={3} arrows={true} homeSlider={true}/>}
                     </Fragment>
                   )}
                 </Media>
@@ -78,10 +110,12 @@ class SaleBanner extends Component {
 const mapStateToProps = (state) => ({
   newProducts: state.products.newProducts,
   saleProducts: state.products.saleProducts,
+  products: state.products.products,
 });
 const mapDispatchToProps = {
   getSaleRequest,
   getNewRequest,
+  getProductsRequest,
 };
 
 const Container = connect(

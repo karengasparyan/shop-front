@@ -51,7 +51,7 @@ class Search extends Component {
       query.s = search
       this.props.getProductsRequest(query);
     }
-    this.setState({showSearch: true})
+      this.setState({showSearch: true})
   }
 
   onChangeSearch = (ev) => {
@@ -94,58 +94,66 @@ class Search extends Component {
     }
   }
 
+  cleanSearch = () => {
+    this.setState({search: ''})
+    let query = queryString.parse(window.location.search); query.s = '';
+    this.props.history.replace(`?${queryString.stringify(query)}`);
+  }
+
   render() {
     const {products, productsRequestStatus, match: {path},} = this.props;
-    let {showSearch} = this.state;
-    let query = queryString.parse(window.location.search);
+    const {showSearch, search} = this.state;
+    const query = queryString.parse(window.location.search);
+
     if (!products) {
-      return <img src={Preloader} width="40px" height="40px"/>;
+      return <img src={Preloader} width="40px" height="40px" />;
     }
 
     const direction = process.env.REACT_APP_API_URL;
 
     return (
-        <Fragment>
-          <div className="advanced-search">
-            <div className="input-group">
-              <input
-                type="text"
-                placeholder="Что вам нужно?"
-                value={query.s}
-                onChange={this.onChangeSearch}
-                onClick={this.showSearch}
-              />
-              {/*<button type="button"><i className="ti-search"/></button>*/}
-            </div>
+      <Fragment>
+        <div className="advanced-search">
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Что вам нужно?"
+              value={query.s}
+              onChange={this.onChangeSearch}
+              onClick={this.showSearch}
+            />
+            {/*<button type="button"><i className="ti-search"/></button>*/}
+            {query.s !== '' && search && <i className="ti-close cleanSearch" onClick={this.cleanSearch} title='очистить'/>}
           </div>
-          <AnimateGroup durationIn={200} animation="bounce">
-            {showSearch && path !== '/shop' &&
-            <ul onScroll={this.changeRequest} ref={this.searchListRef} className="searchLists">
-              <AnimateGroup durationIn={200} animation="bounce">
-                {_.isEmpty(products) ? <p>Поиск не дал результатов</p> :
-                  products.map(p => <li key={p.id}>
-                    <Link to={`/product/${p.id}`} style={{display: 'flex'}}>
-                      <img
-                        width={100}
-                        height={100}
-                        src={`${direction}/productImage/${p.id}/${p.images[0].path}`}
-                        alt={`image_${p.id}`}/>
-                      <div style={{display: 'flex', flexWrap: 'wrap'}}>
-                        <span>{Utils.sliceText(p.name, 25)},</span>
-                        {p.attributes.filter(f => f.attributeKey !== 'секция комплектация').map(a => <Fragment
-                          key={a.key}>
-                          <span>{a.attributeKey} - </span>
-                          <span>{a.attributeValue},</span>
-                        </Fragment>)}
-                      </div>
-                    </Link>
-                    <hr/>
-                  </li>)}
-                {productsRequestStatus === 'request' && <li><img src={Preloader} width="50px"/></li>}
-              </AnimateGroup>
-            </ul>}
-          </AnimateGroup>
-        </Fragment>
+        </div>
+        <AnimateGroup durationIn={200} animation="bounce">
+          {showSearch && path !== '/shop' &&
+          <ul onScroll={this.changeRequest} ref={this.searchListRef} className="searchLists">
+            <AnimateGroup durationIn={200} animation="bounce">
+              {_.isEmpty(products) ? <p>Поиск не дал результатов</p> :
+                products.map(p => <li key={p.id}>
+                  <Link to={`/product/${p.id}`} style={{display: 'flex'}}>
+                    <img
+                      width={100}
+                      height={100}
+                      src={`${direction}/productImage/${p.id}/${p.images[0].path}`}
+                      alt={`image_${p.id}`}/>
+                    <div style={{display: 'flex', flexWrap: 'wrap'}}>
+                      <span>{Utils.sliceText(p.name, 25)},</span>
+                      {p.attributes.filter(f => f.attributeKey !== 'секция комплектация').map(a => <Fragment
+                        key={a.key}>
+                        <span>{a.attributeKey} - </span>
+                        <span>{a.attributeValue},</span>
+                      </Fragment>)}
+                    </div>
+                  </Link>
+                  <hr/>
+                </li>)}
+              {productsRequestStatus === 'request' && <li><img src={Preloader} width="50px"/></li>}
+            </AnimateGroup>
+          </ul>}
+        </AnimateGroup>
+      </Fragment>
     );
   }
 }

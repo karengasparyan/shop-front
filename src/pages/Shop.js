@@ -70,7 +70,7 @@ class Shop extends Component {
               }}>
                 {matches => (
                   <Fragment>
-                    {!matches.small && <Sidebar position="sticky" />}
+                    {!matches.small && <Sidebar />}
                     {matches.small && <Fragment>
                       <Modal
                         closeTimeoutMS={500}
